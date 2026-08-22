@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  /* Color tokens, named to match their Figma variables exactly (slashes
+     become hyphens) so this file is the only place a token's value or
+     name ever needs to change. Two exceptions: `accent` is an
+     interactive-state color from before the Figma sync, with no Figma
+     variable backing it; `surface` was renamed from Figma's own
+     "bureoBackground", a leaked internal component name, not a real
+     token. */
+  --color-on-surface: #000000;
+  --color-inverse-surface: #000000;
+  --color-surface: #ffffff;
+  --color-accent: #b5502c;
+  --color-secondary: #b6b2af;
+  --color-on-surface-variant: #70665c;
+  --color-primary-container: #f5f5f4;
+  --color-neutral-300: #d4d4d4;
+}
+
+/* No global `scroll-behavior: smooth` — it hijacks every wheel/trackpad
+   scroll, not just anchor jumps, and the browser's own re-animation of
+   each input tick reads as a short stall before the page moves. The
+   Work/About nav links get their smooth jump from an onClick handler
+   instead (see Nav.tsx), scoped to just that interaction. */
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Type scale reference — Figma token → Tailwind alias.
+   Only reach for an explicit text-[Npx] when a value doesn't land on
+   this scale (e.g. the one-off letter-spacing values below).
+     font/size/sm   14px  -> text-sm
+     font/size/base 16px  -> text-base
+     font/leading/4 16px  -> leading-4
+     font/tracking/normal 0px    -> tracking-normal
+     font/tracking/wide   0.4px -> tracking-[0.4px] (not on Tailwind's default scale) */

@@ -1,0 +1,168 @@
+{
+  "studio": {
+    "name": "Studio A&M",
+    "legalName": "Artist & Machine",
+    "location": "Beaverton, OR",
+    "tagline": "Welcome.",
+    "intro": "Artist & Machine™ is a freelance design company based in Beaverton, OR.",
+    "subIntro": "Equal parts creative and technical I work closely with clients in effort to build well designed products.",
+    "signoff": "Thanks for stopping by.",
+    "designer": {
+      "name": "Bion Porzio",
+      "email": "bion@artistandmachine.com",
+      "instagram": "https://www.instagram.com/artistandmachine/",
+      "linkedin": "https://www.linkedin.com/in/bion/",
+      "photo": "/images/about/bion-headshot.png"
+    },
+    "capabilities": [
+      "Web & Digital Product",
+      "Exhibition & Trade Shows",
+      "Brand & Identity",
+      "Marketing & Growth Support",
+      "Print & Packaging",
+      "Visual Merchandising",
+      "Industrial & Product Design",
+      "Motion & Content"
+    ],
+    "heroImages": [
+      "/images/hero/hero-1.png",
+      "/images/hero/hero-2.png",
+      "/images/hero/hero-3.png"
+    ],
+    "capabilityImages": [
+      "/images/about/capability-web-digital-product.jpg",
+      "/images/about/capability-exhibition-trade-shows.jpg",
+      "/images/about/capability-brand-identity.jpg",
+      "/images/about/about-4.jpg",
+      "/images/about/capability-print-packaging.jpg",
+      "/images/about/capability-visual-merchandising.jpg",
+      "/images/about/capability-industrial-product-design.jpg",
+      "/images/about/about-8.jpg"
+    ]
+  },
+  "projects": [
+    {
+      "id": "future-fabrics-expo-2026",
+      "title": "Future Fabrics Exposition June 2026",
+      "year": 2026,
+      "category": "Trade Show",
+      "location": "Brussels, Belgium",
+      "clientLabel": "futurefabricsexpo.org",
+      "clientUrl": "https://futurefabricsexpo.org/",
+      "image": "/images/projects/future-fabrics-expo-2026.jpg",
+      "description": "Environmental and digital assets for Future Fabrics Exposition June 2026, designed to help visitors navigate the show and understand the momentum behind next-generation material solutions.",
+      "rawNotes": "",
+      "needsDescription": false
+    },
+    {
+      "id": "netplus-brand-guidelines",
+      "title": "NetPlus® Brand Guidelines",
+      "year": 2026,
+      "category": "Brand Development",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/netplus-brand-guidelines.jpg",
+      "description": "We created new brand guidelines to compliment the V2 NetPlus rebrand.",
+      "rawNotes": "",
+      "needsDescription": true,
+      "note": "Description in prototype was truncated with an ellipsis — confirm/expand wording before launch.",
+      "brandLogo": "/brand/logo-netplus-v2.svg"
+    },
+    {
+      "id": "netplus-hang-tags",
+      "title": "NetPlus Hang Tags",
+      "year": 2026,
+      "category": "Print & Packaging",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/netplus-hang-tags.jpg",
+      "description": "",
+      "rawNotes": "Pulled from the Figma Work section (node 5092:231) — title only, body copy is still lorem ipsum in the design file.",
+      "needsDescription": true,
+      "brandLogo": "/brand/logo-netplus-v1.svg",
+      "partnerLogo": "/brand/logo-bureo.svg"
+    },
+    {
+      "id": "netplus-woven-label",
+      "title": "NetPlus Woven Label",
+      "year": 2026,
+      "category": "Print & Packaging",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/netplus-woven-label.jpg",
+      "description": "",
+      "rawNotes": "Pulled from the Figma Work section (node 5112:600) — title only, body copy is still lorem ipsum in the design file.",
+      "needsDescription": true,
+      "brandLogo": "/brand/logo-netplus-v2.svg",
+      "partnerLogo": "/brand/logo-bureo.svg"
+    },
+    {
+      "id": "hangpro-slidehanger-packaging",
+      "title": "HangPro® SlideHanger® Packaging",
+      "year": 2026,
+      "category": "Print & Packaging",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/hangpro-slidehanger-packaging.jpg",
+      "description": "Packaging development for HangPro® SlideHanger®, balancing product clarity, shelf presence, and production-ready detail across a compact retail format.",
+      "rawNotes": "",
+      "needsDescription": false
+    },
+    {
+      "id": "performance-days-march-2026",
+      "title": "Performance Days March 2026",
+      "year": 2026,
+      "category": "Trade Show",
+      "location": "",
+      "clientLabel": "performancedays.com",
+      "clientUrl": "https://www.performancedays.com/",
+      "image": "/images/projects/performance-days-march-2026.jpg",
+      "description": "A trade show system for Performance Days March 2026, bringing together brand cues, event messaging, and practical display moments for a clear and memorable booth experience.",
+      "rawNotes": "",
+      "needsDescription": false
+    },
+    {
+      "id": "textile-exchange-fall-2025",
+      "title": "Textile Exchange Fall 2025",
+      "year": 2025,
+      "category": "Trade Show",
+      "location": "Portugal",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/textile-exchange-fall-2025.jpg",
+      "description": "Trade show creative for Textile Exchange Fall 2025, shaping a polished presence that connects material innovation, partner visibility, and event-ready communication.",
+      "rawNotes": "",
+      "needsDescription": false
+    },
+    {
+      "id": "peak-performance-helium-loop-id-tag",
+      "title": "ID TAG: Peak Performance® Helium Loop R&D Jacket",
+      "year": 2025,
+      "category": "Trade Show",
+      "location": "Germany",
+      "clientLabel": "peakperformance.com",
+      "clientUrl": "https://www.peakperformance.com/pl/rd-helium-loop",
+      "image": "/images/projects/peak-performance-helium-loop-id-tag.jpg",
+      "description": "An ID tag and presentation system for Peak Performance® Helium Loop R&D, highlighting material collaboration and product experimentation with concise, apparel-ready detail.",
+      "rawNotes": "",
+      "needsDescription": false
+    },
+    {
+      "id": "bureo-hq-north-america",
+      "title": "Bureo Inc HQ North America",
+      "year": 2024,
+      "category": "Visual Merchandising",
+      "location": "California",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/bureo-hq-north-america.jpg",
+      "description": "Visual merchandising for Bureo’s North America showroom, translating ocean-positive material stories into a spatial experience for partners, visitors, and internal teams.",
+      "rawNotes": "",
+      "needsDescription": false
+    }
+  ]
+}
