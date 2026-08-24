@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/SmoothScroll";
+import { themeInitScript } from "@/components/ThemeToggle";
 import "./globals.css";
 
 // Satoshi — the studio's single type family per the Figma source of
@@ -15,7 +17,7 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Studio A&M — Artist & Machine",
+  title: "Studio A&M — Artist & Machine™",
   description:
     "Artist & Machine is a freelance design company based in Beaverton, OR. Equal parts creative and technical, working closely with clients to build well designed products.",
 };
@@ -28,6 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={satoshi.variable}>
       <body>
+        {/* Sets [data-theme] before first paint (Next's own
+            beforeInteractive injection point, ahead of hydration) so a
+            stored dark preference doesn't flash light then snap dark. */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <SmoothScroll />
         {children}
       </body>

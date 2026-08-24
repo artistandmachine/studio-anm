@@ -12,7 +12,7 @@ export default function Footer({
   return (
     <footer
       id="footer"
-      className="relative flex h-[360px] w-full flex-col items-center justify-between bg-inverse-surface px-[56px] text-white"
+      className="relative flex h-[360px] w-full flex-col items-center justify-between bg-inverse-surface px-[56px] text-on-inverse-surface"
     >
       <div className="flex h-[80px] w-full items-start justify-end py-[24px]" />
 
@@ -29,7 +29,7 @@ export default function Footer({
             <div className="flex h-[32px] w-full items-start justify-end overflow-clip pr-[8px] pt-[8px]">
               <a
                 href={`mailto:${email}`}
-                className="whitespace-nowrap text-[14px] leading-[1.2] tracking-[0.14px] text-white transition-opacity duration-200 ease-out hover:opacity-60"
+                className="text-footer-link whitespace-nowrap text-on-inverse-surface transition-opacity duration-200 ease-out hover:opacity-60"
               >
                 {email}
               </a>

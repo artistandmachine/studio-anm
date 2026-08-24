@@ -1,22 +1,69 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+/* Redefines Tailwind's `dark:` variant to key off a manually-set
+   [data-theme="dark"] attribute instead of the OS/browser's
+   prefers-color-scheme — the toggle in ThemeToggle.tsx is the only thing
+   that ever sets it, so the theme never silently follows the browser. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ============================================================
+   THEME — every color used anywhere on the site lives here, as a
+   semantic token (what the color is FOR, e.g. "surface", not what it
+   IS, e.g. "white"). Change a value below and every component using
+   that token updates everywhere at once — nothing to hunt down in
+   individual components. Tokens are named to match their Figma
+   variables (slashes become hyphens) so this file stays the single
+   source of truth; `tailwind.config.js` just aliases `bg-<token>` /
+   `text-<token>` / etc. to `var(--color-<token>)`.
+
+   Light values live on :root (the default). Dark values live on
+   :root[data-theme="dark"], which is the ONLY thing that ever
+   overrides them — see ThemeToggle.tsx. There's no
+   `@media (prefers-color-scheme: dark)` block by design: the theme
+   never switches on its own, only via the toggle.
+   ============================================================ */
 :root {
-  /* Color tokens, named to match their Figma variables exactly (slashes
-     become hyphens) so this file is the only place a token's value or
-     name ever needs to change. Two exceptions: `accent` is an
-     interactive-state color from before the Figma sync, with no Figma
-     variable backing it; `surface` was renamed from Figma's own
-     "bureoBackground", a leaked internal component name, not a real
-     token. */
-  --color-on-surface: #000000;
+  --color-on-surface: #000000; /* text/icons on `surface` */
+  --color-surface: #ffffff; /* main page/component background */
+  --color-inverse-surface: #000000; /* contrast band vs. `surface` (footer, top progress-bar track) */
+  --color-on-inverse-surface: #ffffff; /* text/icons on `inverse-surface` */
+  --color-secondary: #b6b2af; /* outer page letterbox behind the main content column */
+  --color-surface-variant: #b6b2af; /* same as secondary, kept in sync */
+  --color-on-surface-variant: #70665c; /* muted fg, e.g. the page-load progress-bar fill */
+  --color-primary-container: #f5f5f4; /* placeholder swatch fill for missing media */
+  --color-neutral-300: #d4d4d4; /* inactive/track color for each section's own progress bar */
+  --color-tertiary: #7c6699; /* active nav-link color, ::selection background */
+  --color-progress-bar: #000000; /* hex of tertiary */
+  --color-on-progress-bar: #70665c; /* fill color on top of `progress-bar` */
+}
+
+:root[data-theme="dark"] {
+  /* Placeholder values — the RGB complement of each light value below
+     (255-r, 255-g, 255-b), just to have *something* coherent in place
+     until real dark-theme colors are supplied. Swap freely; nothing
+     else needs to change. */
+  --color-on-surface: #ffffff; /* complement of light's #000000 */
+  --color-surface: #1a1a1a; /* complement of light's #ffffff */
+  /* inverse-surface/on-inverse-surface deliberately stay the same as
+     light (not complemented) — the footer's logo/icon SVGs are
+     pre-colored art files (not currentColor), recolored to white today
+     via a CSS `invert` filter. Flipping this pair would need the footer
+     to go light in dark theme, which would require re-deriving each
+     SVG's invert direction too; keeping the footer a constant dark band
+     in both themes sidesteps that entirely. Change deliberately,
+     together with Footer.tsx's filters, if you want the footer to
+     invert too. */
   --color-inverse-surface: #000000;
-  --color-surface: #ffffff;
-  --color-accent: #b5502c;
-  --color-secondary: #b6b2af;
-  --color-on-surface-variant: #70665c;
+  --color-on-inverse-surface: #ffffff;
+  --color-secondary: #70665C; /* complement of light's #b6b2af */
+  --color-surface-variant: hsl(30, 2%, 14%); /* same as secondary, kept in sync */
+  --color-on-surface-variant: #70665C; /* complement of light's #70665c */
   --color-primary-container: #f5f5f4;
-  --color-neutral-300: #d4d4d4;
+  --color-neutral-300: #2b2b2b; /* complement of light's #d4d4d4 */
+  --color-tertiary: #7c6699; /* complement of light's #7c6699 */
+  --color-progress-bar: hsl(30, 15%, 30%); /* hex of tertiary */
+  --color-on-progress-bar: #ffffff; /* fill color on top of `progress-bar` */
 }
 
 /* No global `scroll-behavior: smooth` — it hijacks every wheel/trackpad
@@ -31,15 +78,38 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-tertiary);
   color: #fff;
 }
 
-/* Type scale reference — Figma token → Tailwind alias.
-   Only reach for an explicit text-[Npx] when a value doesn't land on
-   this scale (e.g. the one-off letter-spacing values below).
-     font/size/sm   14px  -> text-sm
-     font/size/base 16px  -> text-base
-     font/leading/4 16px  -> leading-4
-     font/tracking/normal 0px    -> tracking-normal
-     font/tracking/wide   0.4px -> tracking-[0.4px] (not on Tailwind's default scale) */
+/* Text styles — every typographic treatment used on the site, named and
+   centralized here so changing a font-size/weight/spacing updates every
+   usage at once instead of hunting down repeated Tailwind utility
+   strings across components. Color, whitespace, and alignment stay in
+   each component's own className — these classes are typography only. */
+@layer components {
+  /* Small uppercase pinned labels: "Work", "About", "2026", "Capabilities" */
+  .text-label {
+    @apply text-sm font-medium uppercase leading-4 tracking-[0.4px];
+  }
+  /* Paragraph copy: Headline intro lines, About capability list, designer name */
+  .text-body {
+    @apply text-base leading-5 tracking-normal;
+  }
+  /* Project tile title (Work section) */
+  .text-project-title {
+    @apply text-sm font-medium leading-4 tracking-normal;
+  }
+  /* Project tile description (Work section) */
+  .text-project-description {
+    @apply text-sm font-normal leading-4 tracking-normal;
+  }
+  /* Nav header links: "Work", "About" */
+  .text-nav-link {
+    @apply text-[14px] font-medium leading-[14px] tracking-[0.3px];
+  }
+  /* Footer links (email, etc.) */
+  .text-footer-link {
+    @apply text-[14px] leading-[1.2] tracking-[0.14px];
+  }
+}

@@ -18,7 +18,7 @@ export default function StickyLabel({
 }) {
   return (
     <div className={`sticky top-[90px] ${className}`}>
-      <p className="whitespace-nowrap text-sm font-medium leading-4 uppercase tracking-[0.4px] text-on-surface">
+      <p className="text-label whitespace-nowrap text-on-surface">
         {children}
       </p>
     </div>

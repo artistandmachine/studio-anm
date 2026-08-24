@@ -52,7 +52,9 @@
       "image": "/images/projects/future-fabrics-expo-2026.jpg",
       "description": "Environmental and digital assets for Future Fabrics Exposition June 2026, designed to help visitors navigate the show and understand the momentum behind next-generation material solutions.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-future-fabrics-expo-2026-client.svg",
+      "partnerLogo": "/brand/logo-future-fabrics-expo-2026-partner.svg"
     },
     {
       "id": "netplus-brand-guidelines",
@@ -67,7 +69,8 @@
       "rawNotes": "",
       "needsDescription": true,
       "note": "Description in prototype was truncated with an ellipsis — confirm/expand wording before launch.",
-      "brandLogo": "/brand/logo-netplus-v2.svg"
+      "clientLogo": "/brand/logo-netplus-v2.svg",
+      "partnerLogo": "/brand/logo-netplus-brand-guidelines-partner.svg"
     },
     {
       "id": "netplus-hang-tags",
@@ -81,7 +84,7 @@
       "description": "",
       "rawNotes": "Pulled from the Figma Work section (node 5092:231) — title only, body copy is still lorem ipsum in the design file.",
       "needsDescription": true,
-      "brandLogo": "/brand/logo-netplus-v1.svg",
+      "clientLogo": "/brand/logo-netplus-v1.svg",
       "partnerLogo": "/brand/logo-bureo.svg"
     },
     {
@@ -96,7 +99,7 @@
       "description": "",
       "rawNotes": "Pulled from the Figma Work section (node 5112:600) — title only, body copy is still lorem ipsum in the design file.",
       "needsDescription": true,
-      "brandLogo": "/brand/logo-netplus-v2.svg",
+      "clientLogo": "/brand/logo-netplus-v2.svg",
       "partnerLogo": "/brand/logo-bureo.svg"
     },
     {
@@ -110,7 +113,9 @@
       "image": "/images/projects/hangpro-slidehanger-packaging.jpg",
       "description": "Packaging development for HangPro® SlideHanger®, balancing product clarity, shelf presence, and production-ready detail across a compact retail format.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-hangpro-slidehanger-packaging-client.svg",
+      "partnerLogo": "/brand/logo-hangpro-slidehanger-packaging-partner.svg"
     },
     {
       "id": "performance-days-march-2026",
@@ -123,7 +128,9 @@
       "image": "/images/projects/performance-days-march-2026.jpg",
       "description": "A trade show system for Performance Days March 2026, bringing together brand cues, event messaging, and practical display moments for a clear and memorable booth experience.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-performance-days-march-2026-client.svg",
+      "partnerLogo": "/brand/logo-performance-days-march-2026-partner.svg"
     },
     {
       "id": "textile-exchange-fall-2025",
@@ -136,7 +143,9 @@
       "image": "/images/projects/textile-exchange-fall-2025.jpg",
       "description": "Trade show creative for Textile Exchange Fall 2025, shaping a polished presence that connects material innovation, partner visibility, and event-ready communication.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-textile-exchange-fall-2025-client.svg",
+      "partnerLogo": "/brand/logo-textile-exchange-fall-2025-partner.svg"
     },
     {
       "id": "peak-performance-helium-loop-id-tag",
@@ -149,7 +158,39 @@
       "image": "/images/projects/peak-performance-helium-loop-id-tag.jpg",
       "description": "An ID tag and presentation system for Peak Performance® Helium Loop R&D, highlighting material collaboration and product experimentation with concise, apparel-ready detail.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-peak-performance-helium-loop-id-tag-client.svg",
+      "partnerLogo": "/brand/logo-peak-performance-helium-loop-id-tag-partner.svg"
+    },
+    {
+      "id": "outerknown-apex-evolution",
+      "title": "Apex Evolution",
+      "year": 2025,
+      "category": "Brand & Identity",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/outerknown-apex-evolution.jpg",
+      "description": "",
+      "rawNotes": "Placeholder entry — add real project details, description, and image.",
+      "needsDescription": true,
+      "clientLogo": "/brand/logo-netplus-v1.svg",
+      "partnerLogo": "/brand/logo-outerknown.svg"
+    },
+    {
+      "id": "oyuki-website-illustrations",
+      "title": "Website illustrations",
+      "year": 2025,
+      "category": "Web & Digital Product",
+      "location": "",
+      "clientLabel": "",
+      "clientUrl": "",
+      "image": "/images/projects/oyuki-website-illustrations.jpg",
+      "description": "",
+      "rawNotes": "Placeholder entry — add real project details, description, and image.",
+      "needsDescription": true,
+      "clientLogo": "/brand/logo-netplus-v1.svg",
+      "partnerLogo": "/brand/logo-oyuki.svg"
     },
     {
       "id": "bureo-hq-north-america",
@@ -162,7 +203,9 @@
       "image": "/images/projects/bureo-hq-north-america.jpg",
       "description": "Visual merchandising for Bureo’s North America showroom, translating ocean-positive material stories into a spatial experience for partners, visitors, and internal teams.",
       "rawNotes": "",
-      "needsDescription": false
+      "needsDescription": false,
+      "clientLogo": "/brand/logo-bureo.svg",
+      "partnerLogo": "/brand/logo-bureo-hq-north-america-partner.svg"
     }
   ]
 }
