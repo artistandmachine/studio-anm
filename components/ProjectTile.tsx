@@ -19,15 +19,15 @@ export type Project = {
 
 export default function ProjectTile({ project }: { project: Project }) {
   return (
-    <div className="flex items-start justify-end gap-[56px] overflow-clip">
-      <div className="flex min-w-0 max-w-[365px] flex-1 flex-col items-start gap-[8px] overflow-clip">
-        <div className="flex w-full items-end pr-[24px]">
+    <div className="flex items-start justify-end gap-14 overflow-clip">
+      <div className="flex min-w-0 max-w-91.25 flex-1 flex-col items-start gap-2 overflow-clip">
+        <div className="flex w-full items-end pr-6">
           <p className="text-project-title min-w-0 flex-1 text-on-surface">
             {project.title}
           </p>
         </div>
         <div className="h-px w-full bg-on-surface" />
-        <div className="flex w-full items-start pr-[24px]">
+        <div className="flex w-full items-start pr-6">
           <p className="text-project-description min-w-0 flex-1 text-on-surface">
             {project.needsDescription ? (
               <span className="italic text-on-surface/40">
@@ -40,7 +40,7 @@ export default function ProjectTile({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="flex w-[100px] shrink-0 flex-col items-center justify-center gap-[20px] overflow-clip">
+      <div className="flex w-25 shrink-0 flex-col items-center justify-center gap-5 overflow-clip">
         {project.clientLogo && <Logo src={project.clientLogo} className="h-auto max-w-full" />}
         {project.partnerLogo && <Logo src={project.partnerLogo} className="h-auto max-w-full" />}
       </div>
@@ -50,7 +50,7 @@ export default function ProjectTile({ project }: { project: Project }) {
         video={project.video}
         alt={project.title}
         sizes="400px"
-        className="aspect-[5/4] w-[400px] min-w-[400px] shrink-0"
+        className="aspect-5/4  w-full min-w-100 shrink-0"
       />
     </div>
   );

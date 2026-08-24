@@ -18,14 +18,14 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
 
   return (
     <section id="s-work" ref={sectionRef} className="relative flex w-full flex-col items-center overflow-clip">
-      <div className="sticky top-[82px] z-10 w-full bg-surface px-[48px]">
+      <div className="sticky top-20.5 z-10 w-full bg-surface px-12">
         <div className="h-px w-full bg-neutral-300">
           <motion.div className="h-full origin-left bg-on-surface" style={{ scaleX: scrollYProgress }} />
         </div>
       </div>
 
-      <div className="flex w-full items-start px-[56px]">
-        <div className="flex w-[77px] shrink-0 flex-col items-center self-stretch py-[90px]">
+      <div className="flex w-full items-start px-14">
+        <div className="flex w-19.25 shrink-0 flex-col items-center self-stretch py-22.5">
           <div className="h-[25vh] w-full shrink-0" />
           <StickyLabel>Work</StickyLabel>
         </div>
@@ -37,8 +37,8 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
                 <div className="h-[50vh] w-full shrink-0" />
                 <StickyLabel className="w-full text-center">{year}</StickyLabel>
               </div>
-              <div className="flex shrink-0 flex-col items-start gap-[50px] py-[90px]">
-                <div className="h-[100vh] w-full shrink-0" />
+              <div className="flex shrink-0 flex-col items-start gap-12.5 py-22.5">
+                <div className="h-screen w-full shrink-0" />
                 {projects
                   .filter((p) => p.year === year)
                   .map((project) => (

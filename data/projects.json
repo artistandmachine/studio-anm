@@ -1,7 +1,7 @@
 {
   "studio": {
     "name": "Studio A&M",
-    "legalName": "Artist & Machine",
+    "legalName": "Artist & Machine LLC",
     "location": "Beaverton, OR",
     "tagline": "Welcome.",
     "intro": "Artist & Machine™ is a freelance design company based in Beaverton, OR.",
@@ -25,9 +25,9 @@
       "Motion & Content"
     ],
     "heroImages": [
-      "/images/hero/hero-1.png",
-      "/images/hero/hero-2.png",
-      "/images/hero/hero-3.png"
+      "/images/hero/hero-1.webp",
+      "/images/hero/hero-2b.webp",
+      "/images/hero/hero-3.webp"
     ],
     "capabilityImages": [
       "/images/about/capability-web-digital-product.jpg",

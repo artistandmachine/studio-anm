@@ -15,8 +15,8 @@ export default function Hero({ images }: { images: string[] }) {
   }, [images.length]);
 
   return (
-    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-[48px]">
-      <div className="relative aspect-[1104/621] w-full">
+    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-12">
+      <div className="relative aspect-1104/621 w-full">
         {images.map((src, i) => (
           <div
             key={src}

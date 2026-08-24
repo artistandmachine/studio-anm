@@ -1,3 +1,5 @@
+import { InstagramIcon, LinkedInIcon, Wordmark } from "./BrandMarks";
+
 export default function Footer({
   studioName,
   email,
@@ -12,24 +14,25 @@ export default function Footer({
   return (
     <footer
       id="footer"
-      className="relative flex h-[360px] w-full flex-col items-center justify-between bg-inverse-surface px-[56px] text-on-inverse-surface"
+      className="relative flex h-90 w-full flex-col items-center justify-between bg-inverse-surface px-14 text-on-inverse-surface"
     >
-      <div className="flex h-[80px] w-full items-start justify-end py-[24px]" />
+      <div className="flex h-20 w-full items-start justify-end py-6" />
 
-      <div className="flex w-full items-center justify-center gap-[48px]">
+      <div className="flex w-full items-center justify-center gap-12">
         <div className="flex shrink-0 flex-col items-start overflow-clip">
-          <img src="/brand/logo-mark-large.svg" alt={'Artist & Machine™'} className="h-[80px] w-[404px]" />
+          <img src="/brand/logo-mark-large.svg" alt={'Artist & Machine™'} className="h-20 w-101" />
         </div>
         <div className="flex flex-1 flex-row items-center self-stretch">
-          <div className="flex h-full flex-1 flex-col items-start pb-[14px]">
-            <div className="flex h-[32px] w-full items-center overflow-clip py-[8px] pl-[12px] pr-[222px]">
-              <img src="/brand/logo-wordmark.svg" alt="" className="h-[12px] w-[156.746px] invert" />
+          <div className="flex h-full flex-1 flex-col items-start pb-3.5">
+            <div className="flex h-8 w-full items-center overflow-clip py-2 pl-3">
+              <Wordmark className="h-3 w-[156.746px]" />
             </div>
             <div className="h-px w-full bg-on-surface-variant" />
-            <div className="flex h-[32px] w-full items-start justify-end overflow-clip pr-[8px] pt-[8px]">
+            <div className="flex h-8 w-full items-start justify-end overflow-clip pr-2 pt-2">
               <a
                 href={`mailto:${email}`}
-                className="text-footer-link whitespace-nowrap text-on-inverse-surface transition-opacity duration-200 ease-out hover:opacity-60"
+                aria-label={`Email ${studioName}`}
+                className="text-footer-link whitespace-nowrap text-on-inverse-surface transition-opacity duration-200 ease-out hover:text-tertiary"
               >
                 {email}
               </a>
@@ -38,24 +41,24 @@ export default function Footer({
         </div>
       </div>
 
-      <div className="flex h-[80px] w-full items-end justify-end gap-[24px] overflow-clip py-[24px]">
+      <div className="flex h-20 w-full items-end justify-end gap-6 overflow-clip py-6">
         <a
           href={instagram}
           target="_blank"
           rel="noreferrer"
           aria-label="Instagram"
-          className="transition-opacity duration-200 ease-out hover:opacity-60"
+          className="transition-opacity duration-100 ease-out hover:text-tertiary"
         >
-          <img src="/brand/ic-instagram.svg" alt="" className="h-[24px] w-[24px] invert" />
+          <InstagramIcon className="h-6 w-6" />
         </a>
         <a
           href={linkedin}
           target="_blank"
           rel="noreferrer"
           aria-label="LinkedIn"
-          className="transition-opacity duration-200 ease-out hover:opacity-60"
+          className="transition-opacity duration-100 ease-out hover:text-tertiary"
         >
-          <img src="/brand/ic-linkedin.svg" alt="" className="h-[24px] w-[24px] invert" />
+          <LinkedInIcon className="h-6 w-6" />
         </a>
       </div>
     </footer>

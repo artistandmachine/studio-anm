@@ -38,7 +38,7 @@ function NavLink({
     <a
       href={href}
       onClick={(e) => smoothScrollTo(e, href)}
-      className="group relative flex cursor-pointer select-none items-center gap-[10px] py-[2px] pl-[4px] pr-[6px]"
+      className="group relative flex cursor-pointer select-none items-center gap-2.5 py-0.5 pl-1 pr-1.5"
     >
       <p
         className={`text-nav-link whitespace-nowrap transition-opacity duration-200 ease-out group-active:opacity-20 ${
@@ -103,13 +103,13 @@ export default function Nav() {
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
-      <div className="relative z-10 h-[6px] w-full bg-progress-bar">
+      <div className="relative z-10 h-1.5 w-full bg-progress-bar">
         <motion.div
           className="h-full origin-left bg-on-progress-bar"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div className="relative z-0 flex h-[76px] w-full items-center justify-center px-[56px]">
+      <div className="relative z-0 flex h-19 w-full items-center justify-center px-14">
         <div className="flex items-center justify-center">
           <a
             href="#main-home"
@@ -128,11 +128,11 @@ export default function Nav() {
             <img
               src="/brand/logo-mark.svg"
               alt="Studio A&amp;M"
-              className="h-[16px] w-[81px] dark:invert"
+              className="h-4 w-20.25 dark:invert"
             />
           </a>
         </div>
-        <nav className="flex flex-1 items-center justify-end gap-[20px]">
+        <nav className="flex flex-1 items-center justify-end gap-5">
           <ThemeToggle />
           <NavLink href="#s-work" active={activeSection === "#s-work"}>
             Work

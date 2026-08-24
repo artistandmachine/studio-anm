@@ -18,7 +18,7 @@ export default function ProgressMask() {
 
   return (
     <div
-      className="sticky top-0 z-20 h-[82px] w-full bg-surface"
+      className="sticky top-0 z-20 h-20.25 w-full bg-surface"
       style={{ transform: `translateY(${hideOffset(progress)}px)` }}
     />
   );

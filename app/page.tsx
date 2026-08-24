@@ -38,7 +38,7 @@ export default function Home() {
               its "About" label, the mask, and the nav logo all finish
               sliding off-screen within exactly this much scroll, with the
               footer appearing right behind them and no dead space. */}
-          <div id="s-footer-filler" className="h-[100px] w-full" />
+          <div id="s-footer-filler" className="h-25 w-full" />
           <Footer
             studioName={studio.name}
             email={studio.designer.email}
