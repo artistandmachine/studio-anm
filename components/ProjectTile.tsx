@@ -9,6 +9,7 @@ export type Project = {
   clientLabel?: string;
   clientUrl?: string;
   image: string;
+  video?: string;
   description: string;
   needsDescription?: boolean;
   brandLogo?: string;
@@ -49,6 +50,7 @@ export default function ProjectTile({ project }: { project: Project }) {
 
       <Media
         src={project.image}
+        video={project.video}
         alt={project.title}
         sizes="366px"
         className="h-[292.4px] w-[365.5px] shrink-0"

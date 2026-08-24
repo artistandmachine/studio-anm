@@ -28,18 +28,49 @@ Every component uses **Tailwind CSS utility classes** for layout, spacing, type,
 
 **How it works:** Tailwind scans your component files for class names, generates only the CSS you use, and injects it into `globals.css`. No CSS files to maintain — just pick classes and go.
 
-## Adding or editing a project
+## Media: images & video
 
-1. Open `data/projects.json`.
-2. Add a new object to the `projects` array (copy an existing one as a template) or edit an existing entry.
-3. Drop the project image into `public/images/projects/` using the filename referenced in `image`.
+All site media lives under `public/`, organized by section so updating the
+site is just replacing a file — no code changes needed as long as the
+filename stays the same:
+
+```
+public/
+├── images/
+│   ├── hero/       hero-1.png, hero-2.png, hero-3.png
+│   ├── about/      bion-headshot.png, capability-<slug>.jpg (one per capability)
+│   └── projects/   <project-id>.jpg (one per entry in data/projects.json)
+├── videos/
+│   ├── hero/       optional — same naming idea as images/hero if you add motion to the hero
+│   ├── about/       optional — same naming idea as images/about
+│   └── projects/   optional — <project-id>.mp4 for a project that should autoplay video instead of a still
+└── brand/          logos & social icons — logo-mark.svg, logo-wordmark.svg, ic-instagram.svg, etc.
+```
+
+**To update an image or video:** just overwrite the file at its existing
+path with the same filename. The dev server hot-reloads; nothing in
+`data/projects.json` needs to change.
+
+**Placeholders:** every image slot referenced in `data/projects.json`
+currently has a real file at its path — real photos where Bion supplied
+them, and an auto-generated gray "PLACEHOLDER — replace `<filename>` to
+update" swatch everywhere real art hasn't landed yet (currently all 9
+project thumbnails, plus 2 of the 8 About capability images). Drop a real
+photo in with the exact same filename to replace a placeholder.
+
+**Adding a new project:**
+1. Open `data/projects.json`, add a new object to the `projects` array (copy an existing one as a template).
+2. Drop the project image into `public/images/projects/` named to match the `image` field (e.g. `<id>.jpg`). If you don't have the photo yet, leave the field pointing at that filename anyway and drop in any placeholder image — the site will just show it desaturated until you swap it.
+3. Optional — video instead of / in addition to a still: add a `"video"` field (e.g. `"/videos/projects/<id>.mp4"`) and drop the matching file into `public/videos/projects/`. The `image` still renders as the poster frame and as the automatic fallback if the video file is missing or fails to load, so always keep the `image` field set even when a video is present.
 4. If you don't have final copy yet, write your notes in `rawNotes` and set `needsDescription: true` — the row will show a "pending" placeholder instead of guessing. Hand the notes to Claude to polish per `content/STYLE_GUIDE.md`.
 5. Save. The dev server hot-reloads.
 
-## Adding hero / about images
-
+**Hero / About images:**
 - Hero: drop images into `public/images/hero/` and list their paths in `data/projects.json` → `studio.heroImages`. The hero section's height is `images.length * 100vh`, so adding more images makes the pinned scroll sequence longer automatically.
-- About: same idea, `public/images/about/` + `studio.capabilityImages`. Ideally one image per capability, in the same order as `studio.capabilities`.
+- About: same idea, `public/images/about/` + `studio.capabilityImages`. One image per capability, in the same order as `studio.capabilities` — filenames follow `capability-<slug>.jpg` where `<slug>` is the capability name lowercased/hyphenated (e.g. "Marketing & Growth Support" → `capability-marketing-growth-support.jpg`).
+- Either slot also accepts a `video` the same way projects do — swap the string in `heroImages`/`capabilityImages` for an object `{ "image": "...", "video": "..." }` and thread it through `Hero`/`About` the same way `ProjectTile` does (not wired up by default since no hero/about video exists yet — ask Claude to wire it if you add one).
+
+**Image prep:** `next.config.js` sets `images.unoptimized: true` (required for static export), so there's no server-side resizing/compression — pre-size and compress source photos yourself before dropping them in. Roughly 1600px on the long edge, JPEG quality ~80, keeps things fast.
 
 ## Design in Figma, iterate in code
 
