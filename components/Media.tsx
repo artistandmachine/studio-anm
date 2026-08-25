@@ -35,9 +35,14 @@ export default function Media({
   className?: string;
 }) {
   const [videoFailed, setVideoFailed] = useState(false);
+  /*
+  Disable the hover-color effect entirely (always desaturated, or always full color) — delete group-hover:opacity-0 (stays desaturated) or delete opacity-100/set it to opacity-0 (stays full color).
+Change the speed — duration-700 (hover-out) / duration-0 (hover-in) control the ease timing.
+Scope it to specific sections only — since every section shares this one Media component, an on/off toggle would need a new prop (e.g. desaturate?: boolean) rather than editing this file directly, if you want it to vary by section.
+*/
 
   return (
-    <div className={`group relative overflow-hidden bg-primary-container ${className}`}>
+    <div className={`group relative overflow-hidden bg-inverse-surface ${className}`}>
       {video && !videoFailed ? (
         <video
           src={video}
@@ -52,7 +57,7 @@ export default function Media({
       ) : (
         <Photo src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       )}
-      <div className="pointer-events-none absolute inset-0 bg-black mix-blend-saturation opacity-100 transition-opacity duration-700 ease-out group-hover:opacity-0 group-hover:duration-0" />
+      <div className="pointer-events-none absolute inset-0 bg-black mix-blend-saturation opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-0 group-hover:duration-0" />
     </div>
   );
 }

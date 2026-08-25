@@ -18,6 +18,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
 
   return (
     <section id="s-work" ref={sectionRef} className="relative flex w-full flex-col items-center overflow-clip">
+      {/* This section's own progress bar, pinned under the nav */}
       <div className="sticky top-20.5 z-10 w-full bg-surface px-12">
         <div className="h-px w-full bg-neutral-300">
           <motion.div className="h-full origin-left bg-on-surface" style={{ scaleX: scrollYProgress }} />
@@ -25,20 +26,23 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
       </div>
 
       <div className="flex w-full items-start px-14">
+        {/* Left rail: sticky "Work" label, pinned for the section's whole scroll range */}
         <div className="flex w-19.25 shrink-0 flex-col items-center self-stretch py-22.5">
-          <div className="h-[25vh] w-full shrink-0" />
+          <div className="spacer-1 w-full shrink-0" />
           <StickyLabel>Work</StickyLabel>
         </div>
 
+        {/* One block per year: a sticky year label on the left, project
+            tiles stacked on the right */}
         <div className="flex min-w-0 flex-1 flex-col items-center">
           {years.map((year) => (
             <div key={year} className="flex w-full items-start">
               <div className="flex flex-1 flex-col items-center self-stretch">
-                <div className="h-[50vh] w-full shrink-0" />
+                <div className="spacer-3 w-full shrink-0" />
                 <StickyLabel className="w-full text-center">{year}</StickyLabel>
               </div>
-              <div className="flex shrink-0 flex-col items-start gap-12.5 py-22.5">
-                <div className="h-screen w-full shrink-0" />
+              <div className="flex shrink-0 flex-col items-end gap-12.5">
+                <div className="spacer-4 w-full shrink-0" />
                 {projects
                   .filter((p) => p.year === year)
                   .map((project) => (
@@ -49,6 +53,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
           ))}
         </div>
       </div>
+      <div className="spacer-2" />
     </section>
   );
 }

@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main id="main-home" className="relative flex w-full flex-col items-center bg-surface-variant">
       <div className="flex w-full flex-col items-center px-[2vw]">
-        <div className="flex w-full max-w-[2000px] flex-col items-center bg-surface">
+        <div className="flex w-full max-w-[1800px] flex-col items-center bg-surface">
           <Nav />
           <Hero images={studio.heroImages} />
           <div className="relative flex w-full flex-col items-center">
@@ -32,13 +32,14 @@ export default function Home() {
               designer={studio.designer}
             />
           </div>
-          {/* Pure scroll-distance ruler, no progress bar or sticky content
-              of its own — sized to exactly the hide distance used in
-              About.tsx/Nav.tsx/ProgressMask.tsx (100px) so the About bar,
-              its "About" label, the mask, and the nav logo all finish
-              sliding off-screen within exactly this much scroll, with the
-              footer appearing right behind them and no dead space. */}
-          <div id="s-footer-filler" className="h-25 w-full" />
+          {/* 80px of breathing room before the footer band. Its own
+              height is otherwise inert now — useFillerProgress measures
+              from this element's top all the way to #footer's bottom
+              (see lib/useAboutEndProgress.ts), so the About bar, its
+              "About" label, the mask, and the nav logo finish sliding
+              off-screen exactly as the footer's bottom edge comes into
+              view, not abruptly right as this gap begins. */}
+          <div id="s-footer-filler" className="h-20 w-full" />
           <Footer
             studioName={studio.name}
             email={studio.designer.email}

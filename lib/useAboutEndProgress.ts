@@ -2,13 +2,30 @@
 
 import { useEffect, useState } from "react";
 
-/** How far the viewport has scrolled through an element, as 0→1: 0 when
- * its top reaches the top of the viewport, 1 once its full height has
- * scrolled past (its bottom reaches the top of the viewport). Meant for
- * a short element used purely as a scroll-distance ruler — e.g.
- * #s-footer-filler, sized to exactly the hide distance below — so "how
- * much of it have I scrolled through" is a clean 0→1 with no slack. */
-export function useFillerProgress(selector = "#s-footer-filler") {
+/** How close the viewport is to the browser's natural max-scroll
+ * position, as 0→1 over the last `hideWindowPx` of scroll: 0 until
+ * you're `hideWindowPx` away from the very end of the page, 1 exactly
+ * at max scroll. Since #footer is the last element on the page,
+ * "reached max scroll" and "reached the bottom of the footer" are the
+ * same moment.
+ *
+ * Deliberately anchored to max-scroll (always reachable by definition)
+ * rather than to a start landmark's rect (e.g. "#s-footer-filler's top
+ * reaches the viewport top") — that geometric condition silently becomes
+ * unreachable whenever the remaining page content after the landmark is
+ * shorter than the viewport itself (here: 80px gap + 360px footer = 440px,
+ * which is less than most viewport heights), since the browser simply
+ * runs out of page to scroll before the landmark's top can reach the
+ * viewport's top. Counting backward a fixed pixel window from the one
+ * point that's always reachable sidesteps that entirely.
+ *
+ * Used to drive the About bar/label/mask/nav logo hide animation so it
+ * finishes exactly as the page's true end (the footer's bottom) comes
+ * into view, instead of a fixed-height ruler div — a ruler's own bottom
+ * edge is always adjacent to whatever comes right after it in flow
+ * (making it taller just pushes that content down; it can never reach
+ * past its own next sibling, so it can't "reach into" the footer). */
+export function useFillerProgress(hideWindowPx = 100) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -16,10 +33,8 @@ export function useFillerProgress(selector = "#s-footer-filler") {
 
     function update() {
       ticking = false;
-      const el = document.querySelector(selector);
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const p = rect.height !== 0 ? -rect.top / rect.height : 0;
+      const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
+      const p = hideWindowPx !== 0 ? (window.scrollY - (maxScrollY - hideWindowPx)) / hideWindowPx : 0;
       setProgress(Math.min(Math.max(p, 0), 1));
     }
 
@@ -36,7 +51,7 @@ export function useFillerProgress(selector = "#s-footer-filler") {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [selector]);
+  }, [hideWindowPx]);
 
   return progress;
 }
@@ -44,10 +59,11 @@ export function useFillerProgress(selector = "#s-footer-filler") {
 /** Maps a 0→1 progress value straight to a translateY (px) that slides an
  * element off the top of the viewport — used on the About progress bar,
  * its "About" label, the shared progress-bar mask, and the nav logo, all
- * driven by the same #s-footer-filler scroll-through progress so they
- * move in lockstep, starting exactly when About's bar reaches 100% fill
- * (the filler sits immediately after #s-about) and finishing within
- * exactly `distance`px of scroll — no slack before the footer appears. */
+ * driven by the same start-of-filler-to-bottom-of-footer progress (see
+ * useFillerProgress) so they move in lockstep, starting exactly when
+ * About's bar reaches 100% fill and finishing within exactly
+ * `distance`px of travel, spread across the whole scroll from there to
+ * the footer's bottom edge — not visible again once the footer arrives. */
 export function hideOffset(progress: number, distance = 100) {
   return -progress * distance;
 }

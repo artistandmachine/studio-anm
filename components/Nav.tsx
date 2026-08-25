@@ -122,14 +122,19 @@ export default function Nav() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="transition-opacity duration-200 ease-out hover:opacity-60"
             style={{ transform: `translateY(${logoHideOffset}px)` }}
           >
-            <img
-              src="/brand/logo-mark.svg"
-              alt="Studio A&amp;M"
-              className="h-4 w-20.25 dark:invert"
-            />
+            <motion.span
+              className="inline-block"
+              whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+              whileTap={{ scale: 1, transition: { duration: 0 } }}
+            >
+              <img
+                src="/brand/logo-mark.svg"
+                alt="Studio A&amp;M"
+                className="h-4 w-20.25 dark:invert"
+              />
+            </motion.span>
           </a>
         </div>
         <nav className="flex flex-1 items-center justify-end gap-5">

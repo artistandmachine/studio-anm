@@ -1,10 +1,54 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import Media from "./Media";
 import StickyLabel from "./StickyLabel";
 import { hideOffset, useFillerProgress } from "@/lib/useAboutEndProgress";
+
+// StickyLabel's own `top-22.5` offset (22.5 * 4 = 90px) — the label
+// stays pinned there natively until its containing block's bottom
+// scrolls up past this line, at which point it unsticks.
+const STICKY_TOP_OFFSET = 90;
+const LABEL_HIDE_WINDOW = 100;
+
+/** Progress (0→1) for the "About" label's own hide, timed to start
+ * `delayPx` of scroll after the Designer label's native sticky-unstick
+ * point (i.e. after the Designer column's bottom passes STICKY_TOP_OFFSET),
+ * not the shared filler-based timeline used by the bar/mask/nav-logo. */
+function useLabelHideProgress(designerColumnRef: React.RefObject<HTMLDivElement | null>, delayPx = 160) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+      const col = designerColumnRef.current;
+      if (!col) return;
+      const designerUnstickDocY = col.getBoundingClientRect().bottom + window.scrollY - STICKY_TOP_OFFSET;
+      const triggerY = designerUnstickDocY + delayPx;
+      const p = (window.scrollY - triggerY) / LABEL_HIDE_WINDOW;
+      setProgress(Math.min(Math.max(p, 0), 1));
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [designerColumnRef, delayPx]);
+
+  return progress;
+}
 
 export default function About({
   capabilities,
@@ -35,9 +79,21 @@ export default function About({
   // filler begins right where #s-about ends.
   const fillerProgress = useFillerProgress();
   const hideY = hideOffset(fillerProgress);
+  // The "About" label hides on its own timeline — 80px of scroll after
+  // the Designer label's native sticky-unstick point — instead of the
+  // shared filler-based one above, so it tucks under ProgressMask (z-20,
+  // sits above the label's default stacking) well before the bar does,
+  // matching how each section's OWN sticky label already tucks under the
+  // incoming section's bar first, rather than both vanishing in lockstep.
+  const designerColumnRef = useRef<HTMLDivElement>(null);
+  const labelProgress = useLabelHideProgress(designerColumnRef);
+  const labelHideY = hideOffset(labelProgress);
 
   return (
     <section id="s-about" ref={sectionRef} className="relative flex w-full flex-col items-center overflow-clip">
+      {/* This section's own progress bar. Slides off with the "About"
+          label below (see hideY) instead of using its native sticky
+          unstick point — see useAboutEndProgress comment above. */}
       <div
         className="sticky top-20.5 z-10 w-full bg-transparent px-12"
         style={{ transform: `translateY(${hideY}px)` }}
@@ -48,22 +104,22 @@ export default function About({
       </div>
 
       <div className="flex w-full items-start px-14">
+        {/* Left rail: sticky "About" label, pinned for the section's whole scroll range */}
         <div className="flex w-19.25 shrink-0 flex-col items-center self-stretch">
           <div className="h-[25vh] w-full shrink-0" />
-          <div style={{ transform: `translateY(${hideY}px)` }}>
-            <StickyLabel>About</StickyLabel>
-          </div>
+          <StickyLabel style={{ transform: `translateY(${labelHideY}px)` }}>About</StickyLabel>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col items-end">
           <div className="h-[50vh] w-full shrink-0" />
-          {/* blockCapabilities */}
+          {/* blockCapabilities: sticky "Capabilities" label on the left,
+              capability text column, capability image column */}
           <div className="flex w-full items-start justify-end">
             <div className="flex min-w-0 flex-1 shrink-0 flex-col items-center self-stretch">
               <StickyLabel className="w-full text-center">Capabilities</StickyLabel>
             </div>
             <div className="min-w-0 max-w-125 flex-1">
-              <div className="h-screen w-full shrink-0" />
+              <div className="spacer-3 w-full shrink-0" />
               {capabilities.map((c) => (
                 <div
                   key={c}
@@ -74,7 +130,7 @@ export default function About({
               ))}
             </div>
             <div className="min-w-0 max-w-125 flex-1">
-              <div className="h-screen w-full shrink-0" />
+              <div className="spacer-3 w-full shrink-0" />
               {images.map((src) => (
                 <Media
                   key={src}
@@ -86,9 +142,10 @@ export default function About({
             </div>
           </div>
 
-          {/* blockTeam */}
+          {/* blockTeam: sticky "Designer" label on the left, designer
+              photo/name/social links on the right */}
           <div className="flex w-full items-start justify-between px-32">
-            <div className="flex flex-1 flex-col items-center self-stretch">
+            <div ref={designerColumnRef} className="flex flex-1 flex-col items-center self-stretch">
               <div className="h-[50vh] w-full shrink-0" />
               <StickyLabel className="w-full text-center">Designer</StickyLabel>
               <div className="h-[150vh] w-full shrink-0" />
@@ -125,7 +182,7 @@ export default function About({
               </div>
             </div>
           </div>
-          <div className="h-[150vh] w-full shrink-0" />
+          <div className="spacer-4 w-full shrink-0" />
         </div>
       </div>
     </section>

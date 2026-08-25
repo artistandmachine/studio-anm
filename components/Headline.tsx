@@ -32,25 +32,24 @@ export default function Headline({
       </div>
       <div className="flex w-full items-start px-14">
         <div className="flex w-19.25 shrink-0 flex-col items-center self-stretch">
-          <div className="h-[25vh] w-full shrink-0" />
+          <div className="spacer-1" />
           <StickyLabel>Studio A&amp;M</StickyLabel>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center">
-          <div className="h-[50vh] w-full shrink-0" />
+          <div className="spacer-3 w-full shrink-0" />
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="flex w-full max-w-150 flex-col items-start gap-2 text-body text-on-surface"
-          >
+            className="flex w-full max-w-150 flex-col items-start gap-2 text-body text-on-surface">
             <p>{tagline}</p>
             <p>{intro}</p>
             <p className="max-w-[420px]">{subIntro}</p>
             <p>{signoff}</p>
             <p>– {designerFirstName}</p>
           </motion.div>
-          <div className="h-[50vh] w-full shrink-0" />
+          <div className="spacer-3 w-full shrink-0" />
         </div>
       </div>
     </section>

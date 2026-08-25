@@ -61,7 +61,7 @@
   --color-on-surface-variant: #70665C; /* complement of light's #70665c */
   --color-primary-container: #f5f5f4;
   --color-neutral-300: #2b2b2b; /* complement of light's #d4d4d4 */
-  --color-tertiary: #7c6699; /* complement of light's #7c6699 */
+  --color-tertiary: hsl(266, 20%, 70%); /* light's #7c6699 kept same hue/sat; lightness raised to 70% since the original value was only 3.5:1 against this theme's `surface` (#1a1a1a) — below the 4.5:1 WCAG AA minimum for text. This passes at 7.4:1. */
   --color-progress-bar: hsl(30, 15%, 30%); /* hex of tertiary */
   --color-on-progress-bar: #ffffff; /* fill color on top of `progress-bar` */
 }
@@ -75,11 +75,55 @@
 body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
+  user-select: none;
+}
+
+/* Text stays selectable only where it's a link or a button — everything
+   else (headings, body copy, labels) opts out via body's user-select
+   above so it reads like an app, not a document. */
+a,
+a *,
+button,
+button * {
+  user-select: text;
 }
 
 ::selection {
   background: var(--color-tertiary);
   color: #fff;
+}
+/* View height spacers — used to push content down the page so the sticky nav
+   header doesn't overlap it. Each spacer is a multiple of 25vh, so the
+   first 4 spacers are 25/50/75/100vh, and the next 2 are 125/150vh. */
+
+.spacer-1 {
+  height: 25vh;
+  width: 100%;
+}
+
+.spacer-2 {
+  height: 50vh;
+  width: 100%;
+}
+
+.spacer-3 {
+  height: 75vh;
+  width: 100%;
+}
+
+.spacer-4 {
+  height: 100vh;
+  width: 100%;
+}
+
+.spacer-5 {
+  height: 125vh;
+  width: 100%;
+}
+
+.spacer-6 {
+  height: 150vh;
+  width: 100%;
 }
 
 /* Text styles — every typographic treatment used on the site, named and
@@ -90,7 +134,7 @@ body {
 @layer components {
   /* Small uppercase pinned labels: "Work", "About", "2026", "Capabilities" */
   .text-label {
-    @apply text-sm font-medium uppercase leading-4 tracking-[0.4px];
+    @apply text-sm font-normal uppercase leading-4 tracking-wider;
   }
   /* Paragraph copy: Headline intro lines, About capability list, designer name */
   .text-body {
@@ -98,18 +142,22 @@ body {
   }
   /* Project tile title (Work section) */
   .text-project-title {
-    @apply text-sm font-medium leading-4 tracking-normal;
+    @apply text-sm font-normal leading-4 tracking-normal;
   }
   /* Project tile description (Work section) */
   .text-project-description {
     @apply text-sm font-normal leading-4 tracking-normal;
   }
+  /* Project tile capability/location/link stack (Work section) */
+  .text-project-meta {
+    @apply text-sm font-normal leading-4 tracking-normal;
+  }
   /* Nav header links: "Work", "About" */
   .text-nav-link {
-    @apply text-[14px] font-medium leading-3.5 tracking-[0.3px];
+    @apply text-sm font-normal leading-3.5 tracking-widest;
   }
   /* Footer links (email, etc.) */
   .text-footer-link {
-    @apply text-[14px] leading-[1.2] tracking-[0.14px];
+    @apply text-sm font-light leading-[1.2] tracking-widest;
   }
 }

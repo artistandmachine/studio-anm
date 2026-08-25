@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MoonIcon, SunIcon } from "./ThemeIcons";
 
 export const THEME_STORAGE_KEY = "theme";
 
@@ -48,7 +49,9 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
-      className="h-[10px] w-[10px] shrink-0 rounded-full bg-on-surface transition-opacity duration-200 ease-out hover:opacity-60"
-    />
+      className="flex shrink-0 cursor-pointer items-center justify-center text-on-surface transition-opacity duration-200 ease-out hover:opacity-60"
+    >
+      {theme === "light" ? <SunIcon className="h-4 w-fit" /> : <MoonIcon className="h-4 w-fit" />}
+    </button>
   );
 }

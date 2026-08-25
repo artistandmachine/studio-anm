@@ -26,18 +26,18 @@
     ],
     "heroImages": [
       "/images/hero/hero-1.webp",
-      "/images/hero/hero-2b.webp",
+      "/images/hero/hero-2.webp",
       "/images/hero/hero-3.webp"
     ],
     "capabilityImages": [
-      "/images/about/capability-web-digital-product.jpg",
-      "/images/about/capability-exhibition-trade-shows.jpg",
-      "/images/about/capability-brand-identity.jpg",
-      "/images/about/capability-marketing-growth-support.jpg",
-      "/images/about/capability-print-packaging.jpg",
-      "/images/about/capability-visual-merchandising.jpg",
-      "/images/about/capability-industrial-product-design.jpg",
-      "/images/about/capability-motion-content.jpg"
+      "/images/about/capability-web-digital-product.webp",
+      "/images/about/capability-exhibition-trade-shows.webp",
+      "/images/about/capability-brand-identity.webp",
+      "/images/about/capability-marketing-growth-support.webp",
+      "/images/about/capability-print-packaging.webp",
+      "/images/about/capability-visual-merchandising.webp",
+      "/images/about/capability-industrial-product-design.webp",
+      "/images/about/capability-motion-content.webp"
     ]
   },
   "projects": [
@@ -54,7 +54,8 @@
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-future-fabrics-expo-2026-client.svg",
-      "partnerLogo": "/brand/logo-future-fabrics-expo-2026-partner.svg"
+      "partnerLogo": "/brand/logo-future-fabrics-expo-2026-partner.svg",
+      "capability": "Exhibition & Trade Shows"
     },
     {
       "id": "netplus-brand-guidelines",
@@ -62,15 +63,16 @@
       "year": 2026,
       "category": "Brand Development",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/netplus-brand-guidelines.jpg",
       "description": "We created new brand guidelines to compliment the V2 NetPlus rebrand.",
       "rawNotes": "",
       "needsDescription": true,
       "note": "Description in prototype was truncated with an ellipsis — confirm/expand wording before launch.",
       "clientLogo": "/brand/logo-netplus-v2.svg",
-      "partnerLogo": "/brand/logo-netplus-brand-guidelines-partner.svg"
+      "partnerLogo": "/brand/logo-netplus-brand-guidelines-partner.svg",
+      "capability": "Brand & Identity"
     },
     {
       "id": "netplus-hang-tags",
@@ -78,14 +80,15 @@
       "year": 2026,
       "category": "Print & Packaging",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/netplus-hang-tags.jpg",
       "description": "",
       "rawNotes": "Pulled from the Figma Work section (node 5092:231) — title only, body copy is still lorem ipsum in the design file.",
       "needsDescription": true,
       "clientLogo": "/brand/logo-netplus-v1.svg",
-      "partnerLogo": "/brand/logo-bureo.svg"
+      "partnerLogo": "/brand/logo-bureo.svg",
+      "capability": "Print & Packaging"
     },
     {
       "id": "netplus-woven-label",
@@ -93,14 +96,15 @@
       "year": 2026,
       "category": "Print & Packaging",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/netplus-woven-label.jpg",
       "description": "",
       "rawNotes": "Pulled from the Figma Work section (node 5112:600) — title only, body copy is still lorem ipsum in the design file.",
       "needsDescription": true,
       "clientLogo": "/brand/logo-netplus-v2.svg",
-      "partnerLogo": "/brand/logo-bureo.svg"
+      "partnerLogo": "/brand/logo-bureo.svg",
+      "capability": "Print & Packaging"
     },
     {
       "id": "hangpro-slidehanger-packaging",
@@ -108,14 +112,15 @@
       "year": 2026,
       "category": "Print & Packaging",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/hangpro-slidehanger-packaging.jpg",
       "description": "Packaging development for HangPro® SlideHanger®, balancing product clarity, shelf presence, and production-ready detail across a compact retail format.",
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-hangpro-slidehanger-packaging-client.svg",
-      "partnerLogo": "/brand/logo-hangpro-slidehanger-packaging-partner.svg"
+      "partnerLogo": "/brand/logo-hangpro-slidehanger-packaging-partner.svg",
+      "capability": "Print & Packaging"
     },
     {
       "id": "performance-days-march-2026",
@@ -130,7 +135,8 @@
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-performance-days-march-2026-client.svg",
-      "partnerLogo": "/brand/logo-performance-days-march-2026-partner.svg"
+      "partnerLogo": "/brand/logo-performance-days-march-2026-partner.svg",
+      "capability": "Exhibition & Trade Shows"
     },
     {
       "id": "textile-exchange-fall-2025",
@@ -138,14 +144,15 @@
       "year": 2025,
       "category": "Trade Show",
       "location": "Portugal",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/textile-exchange-fall-2025.jpg",
       "description": "Trade show creative for Textile Exchange Fall 2025, shaping a polished presence that connects material innovation, partner visibility, and event-ready communication.",
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-textile-exchange-fall-2025-client.svg",
-      "partnerLogo": "/brand/logo-textile-exchange-fall-2025-partner.svg"
+      "partnerLogo": "/brand/logo-textile-exchange-fall-2025-partner.svg",
+      "capability": "Exhibition & Trade Shows"
     },
     {
       "id": "peak-performance-helium-loop-id-tag",
@@ -160,7 +167,8 @@
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-peak-performance-helium-loop-id-tag-client.svg",
-      "partnerLogo": "/brand/logo-peak-performance-helium-loop-id-tag-partner.svg"
+      "partnerLogo": "/brand/logo-peak-performance-helium-loop-id-tag-partner.svg",
+      "capability": "Exhibition & Trade Shows"
     },
     {
       "id": "outerknown-apex-evolution",
@@ -168,14 +176,15 @@
       "year": 2025,
       "category": "Brand & Identity",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/outerknown-apex-evolution.jpg",
       "description": "",
       "rawNotes": "Placeholder entry — add real project details, description, and image.",
       "needsDescription": true,
       "clientLogo": "/brand/logo-netplus-v1.svg",
-      "partnerLogo": "/brand/logo-outerknown.svg"
+      "partnerLogo": "/brand/logo-outerknown.svg",
+      "capability": "Brand & Identity"
     },
     {
       "id": "oyuki-website-illustrations",
@@ -183,14 +192,15 @@
       "year": 2025,
       "category": "Web & Digital Product",
       "location": "",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/oyuki-website-illustrations.jpg",
       "description": "",
       "rawNotes": "Placeholder entry — add real project details, description, and image.",
       "needsDescription": true,
       "clientLogo": "/brand/logo-netplus-v1.svg",
-      "partnerLogo": "/brand/logo-oyuki.svg"
+      "partnerLogo": "/brand/logo-oyuki.svg",
+      "capability": "Web & Digital Product"
     },
     {
       "id": "bureo-hq-north-america",
@@ -198,14 +208,15 @@
       "year": 2024,
       "category": "Visual Merchandising",
       "location": "California",
-      "clientLabel": "",
-      "clientUrl": "",
+      "clientLabel": "yourwebsite.com",
+      "clientUrl": "https://yourwebsite.com",
       "image": "/images/projects/bureo-hq-north-america.jpg",
       "description": "Visual merchandising for Bureo’s North America showroom, translating ocean-positive material stories into a spatial experience for partners, visitors, and internal teams.",
       "rawNotes": "",
       "needsDescription": false,
       "clientLogo": "/brand/logo-bureo.svg",
-      "partnerLogo": "/brand/logo-bureo-hq-north-america-partner.svg"
+      "partnerLogo": "/brand/logo-bureo-hq-north-america-partner.svg",
+      "capability": "Visual Merchandising"
     }
   ]
 }
