@@ -42,7 +42,7 @@ Scope it to specific sections only — since every section shares this one Media
 */
 
   return (
-    <div className={`group relative overflow-hidden bg-inverse-surface ${className}`}>
+    <div className={`group relative overflow-hidden bg-skeleton-fill ${className}`}>
       {video && !videoFailed ? (
         <video
           src={video}

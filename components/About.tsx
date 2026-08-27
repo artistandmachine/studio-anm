@@ -68,7 +68,7 @@ export default function About({
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 90px", "end end"],
+    offset: ["start 80px", "end end"],
   });
   // Slides the bar and "About" label off-screen over #s-footer-filler's
   // scroll range (right after this section, sized to exactly the hide
@@ -95,42 +95,45 @@ export default function About({
           label below (see hideY) instead of using its native sticky
           unstick point — see useAboutEndProgress comment above. */}
       <div
-        className="sticky top-20.5 z-10 w-full bg-transparent px-12"
+        className="sticky top-20.5 z-10 w-full bg-surface px-6 md:px-12"
         style={{ transform: `translateY(${hideY}px)` }}
       >
-        <div className="h-px w-full bg-neutral-300">
-          <motion.div className="h-full origin-left bg-on-surface" style={{ scaleX: scrollYProgress }} />
+        <div className="h-px w-full bg-border-sm">
+          <motion.div className="h-full origin-left bg-progress-sm" style={{ scaleX: scrollYProgress }} />
         </div>
       </div>
 
-      <div className="flex w-full items-start px-14">
+      <div className="flex w-full items-start px-4 sm:px-6 md:px-14">
         {/* Left rail: sticky "About" label, pinned for the section's whole scroll range */}
-        <div className="flex w-19.25 shrink-0 flex-col items-center self-stretch">
+        <div className="hidden sm:flex w-12 md:w-19.25 shrink-0 flex-col items-center self-stretch">
           <div className="h-[25vh] w-full shrink-0" />
-          <StickyLabel style={{ transform: `translateY(${labelHideY}px)` }}>About</StickyLabel>
+          <StickyLabel as="h2" style={{ transform: `translateY(${labelHideY}px)` }}>About</StickyLabel>
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col items-end">
-          <div className="h-[50vh] w-full shrink-0" />
+        <div className="flex min-w-0 flex-1 flex-col items-end w-full">
+          <div className="h-[25vh] sm:h-[50vh] w-full shrink-0" />
+          <div className="sm:hidden w-full pb-4">
+            <span className="text-label text-on-surface">About</span>
+          </div>
           {/* blockCapabilities: sticky "Capabilities" label on the left,
               capability text column, capability image column */}
-          <div className="flex w-full items-start justify-end">
-            <div className="flex min-w-0 flex-1 shrink-0 flex-col items-center self-stretch">
-              <StickyLabel className="w-full text-center">Capabilities</StickyLabel>
+          <div className="flex w-full flex-col lg:flex-row items-start justify-end">
+            <div className="flex min-w-0 flex-1 shrink-0 flex-col items-start sm:items-center self-stretch">
+              <StickyLabel as="h3" className="w-full text-left sm:text-center">Capabilities</StickyLabel>
             </div>
-            <div className="min-w-0 max-w-125 flex-1">
-              <div className="spacer-3 w-full shrink-0" />
+            <div className="min-w-0 max-w-full lg:max-w-125 flex-1 w-full">
+              <div className="spacer-2 sm:spacer-3 w-full shrink-0" />
               {capabilities.map((c) => (
                 <div
                   key={c}
-                  className="flex aspect-400/225 w-full flex-col items-end justify-center pr-20"
+                  className="flex aspect-400/225 w-full flex-col items-end justify-center pr-4 lg:pr-20"
                 >
                   <p className="text-right text-body text-on-surface">{c}</p>
                 </div>
               ))}
             </div>
-            <div className="min-w-0 max-w-125 flex-1">
-              <div className="spacer-3 w-full shrink-0" />
+            <div className="min-w-0 max-w-full lg:max-w-125 flex-1 w-full">
+              <div className="spacer-2 sm:spacer-3 w-full shrink-0" />
               {images.map((src) => (
                 <Media
                   key={src}
@@ -144,18 +147,18 @@ export default function About({
 
           {/* blockTeam: sticky "Designer" label on the left, designer
               photo/name/social links on the right */}
-          <div className="flex w-full items-start justify-between px-32">
-            <div ref={designerColumnRef} className="flex flex-1 flex-col items-center self-stretch">
-              <div className="h-[50vh] w-full shrink-0" />
-              <StickyLabel className="w-full text-center">Designer</StickyLabel>
-              <div className="h-[150vh] w-full shrink-0" />
+          <div className="flex w-full flex-col sm:flex-row items-start justify-between px-0 sm:px-6 md:px-12 lg:px-32">
+            <div ref={designerColumnRef} className="flex flex-1 flex-col items-start sm:items-center self-stretch">
+              <div className="h-[25vh] sm:h-[50vh] w-full shrink-0" />
+              <StickyLabel as="h3" className="w-full text-left sm:text-center">Designer</StickyLabel>
+              <div className="hidden sm:block h-[150vh] w-full shrink-0" />
             </div>
-            <div className="flex min-w-0 max-w-125 flex-1 flex-col items-end justify-end gap-3 self-stretch">
+            <div className="flex min-w-0 max-w-full lg:max-w-125 flex-1 flex-col items-end justify-end gap-3 self-stretch w-full pt-8 sm:pt-0">
               <Media
                 src={designer.photo}
                 alt={designer.name}
                 sizes="(min-width: 1024px) 500px, 100vw"
-                className="aspect-square w-full max-w-125"
+                className="aspect-square w-full max-w-full lg:max-w-125"
               />
               <p className="whitespace-nowrap text-body text-on-surface">
                 {designer.name}
@@ -182,7 +185,7 @@ export default function About({
               </div>
             </div>
           </div>
-          <div className="spacer-4 w-full shrink-0" />
+          <div id="end" className="spacer-4 w-full shrink-0" />
         </div>
       </div>
     </section>

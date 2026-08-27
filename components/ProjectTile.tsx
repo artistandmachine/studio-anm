@@ -20,18 +20,18 @@ export type Project = {
 
 export default function ProjectTile({ project }: { project: Project }) {
   return (
-    <div className="flex items-start justify-end gap-14 overflow-clip">
-      <div className="flex min-w-0 max-w-91.25 flex-1 flex-col items-start gap-2 overflow-clip">
-        <div className="flex w-full items-end pr-6">
-          <p className="text-project-title min-w-0 flex-1 text-on-surface">
+    <article className="flex w-full flex-col lg:flex-row items-start justify-end gap-6 lg:gap-14 overflow-clip">
+      <div className="order-2 lg:order-1 flex w-full min-w-0 max-w-full lg:max-w-91.25 flex-1 flex-col items-start gap-2 overflow-clip">
+        <div className="flex w-full items-end pr-0 lg:pr-6">
+          <h3 className="text-project-title min-w-0 flex-1 text-on-surface">
             {project.title}
-          </p>
+          </h3>
         </div>
-        <div className="h-px w-full min-w-100 bg-on-surface" />
-        <div className="flex items-start pr-6">
+        <div className="h-px w-full bg-on-surface" />
+        <div className="flex w-full items-start pr-0 lg:pr-6">
           <p className="text-project-description min-w-0 flex-1 text-on-surface">
             {project.needsDescription ? (
-              <span className="italic text-on-surface/40">
+              <span className="italic text-on-surface/60">
                 Description pending
               </span>
             ) : (
@@ -62,7 +62,7 @@ export default function ProjectTile({ project }: { project: Project }) {
                 href={project.clientUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-project-meta text-tertiary transition-opacity duration-200 ease-out hover:opacity-60"
+                className="text-project-meta text-accent transition-opacity duration-200 ease-out hover:opacity-60"
               >
                 {project.clientLabel}
               </a>
@@ -71,18 +71,20 @@ export default function ProjectTile({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="flex w-25 shrink-0 flex-col items-center justify-center gap-5 overflow-visible">
-        {project.clientLogo && <Logo src={project.clientLogo} className="h-auto max-w-full" />}
-        {project.partnerLogo && <Logo src={project.partnerLogo} className="h-auto max-w-full" />}
-      </div>
+      {(project.clientLogo || project.partnerLogo) && (
+        <div className="order-last lg:order-2 flex w-auto lg:w-20 shrink-0 flex-row lg:flex-col items-center justify-center gap-4 lg:gap-5 overflow-visible">
+          {project.clientLogo && <Logo src={project.clientLogo} className="h-auto max-h-8 lg:max-h-none max-w-full" />}
+          {project.partnerLogo && <Logo src={project.partnerLogo} className="h-auto max-h-8 lg:max-h-none max-w-full" />}
+        </div>
+      )}
 
       <Media
         src={project.image}
         video={project.video}
         alt={project.title}
-        sizes="400===px"
-        className="aspect-5/4  w-125 min-w-100 shrink-0"
+        sizes="(min-width: 1024px) 500px, 100vw"
+        className="order-1 lg:order-3 aspect-5/4 w-full lg:w-125 lg:min-w-100 shrink-0 lg:shrink"
       />
-    </div>
+    </article>
   );
 }

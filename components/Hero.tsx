@@ -10,6 +10,7 @@ export default function Hero({ images }: { images: string[] }) {
   const [active, setActive] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
   const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (images.length <= 1 || !autoRotate) return;
@@ -34,9 +35,33 @@ export default function Hero({ images }: { images: string[] }) {
     resumeTimeoutRef.current = setTimeout(() => setAutoRotate(true), RESUME_DELAY_AFTER_CLICK);
   }
 
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartXRef.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartXRef.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartXRef.current;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) {
+        // Swiped left -> next
+        goToSlide((i) => (i + 1) % images.length);
+      } else {
+        // Swiped right -> prev
+        goToSlide((i) => (i - 1 + images.length) % images.length);
+      }
+    }
+    touchStartXRef.current = null;
+  }
+
   return (
-    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-12">
-      <div className="relative aspect-1104/621 w-full">
+    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-4 sm:px-6 md:px-12">
+      <div
+        className="relative aspect-1104/621 w-full"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {images.map((src, i) => (
           <div
             key={src}
@@ -63,32 +88,31 @@ export default function Hero({ images }: { images: string[] }) {
               aria-label="Previous slide"
               onClick={() => goToSlide((i) => (i - 1 + images.length) % images.length)}
               style={{ cursor: "url(/icons/cursor-prev.svg) 16 16, pointer" }}
-              className="absolute inset-y-0 left-0 w-1/2"
+              className="absolute inset-y-0 left-0 w-1/2 focus-visible:outline-2 focus-visible:outline-accent"
             />
             <button
               type="button"
               aria-label="Next slide"
               onClick={() => goToSlide((i) => (i + 1) % images.length)}
               style={{ cursor: "url(/icons/cursor-next.svg) 16 16, pointer" }}
-              className="absolute inset-y-0 right-0 w-1/2"
+              className="absolute inset-y-0 right-0 w-1/2 focus-visible:outline-2 focus-visible:outline-accent"
             />
           </>
         )}
 
         {images.length > 1 && (
-          <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-30">
+          <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 sm:gap-12 md:gap-30">
             {images.map((src, i) => (
               <button
                 key={src}
                 type="button"
                 aria-label={`Go to slide ${i + 1}`}
-                aria-current={i === active}
-                disabled={i === active}
+                aria-current={i === active ? "true" : undefined}
                 onClick={() => goToSlide(i)}
-                className="group flex shrink-0 cursor-pointer items-center justify-center p-6 disabled:cursor-default">
+                className="group flex shrink-0 cursor-pointer items-center justify-center p-4 sm:p-6 focus-visible:outline-2 focus-visible:outline-accent">
                 <span
                   aria-hidden="true"
-                  className={`h-1.5 w-1.5 shrink-0 bg-on-inverse-surface transition-transform duration-200 ease-out ${
+                  className={`h-1.5 w-1.5 shrink-0 bg-on-primary-container transition-transform duration-200 ease-out ${
                     i === active ? "" : "opacity-50 group-hover:scale-120 group-hover:opacity-100"
                   }`}
                 />
@@ -97,7 +121,7 @@ export default function Hero({ images }: { images: string[] }) {
           </div>
         )}
       </div>
-      <div className="spacer-1"></div>
+      <div className="spacer-1" />
     </section>
   );
 }

@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* Semantic + brand color tokens, compiled from tokens/*.json (see the THEME
+   note below). Kept adjacent to the Tailwind import so both @import rules
+   sit at the top of the file, as CSS requires. */
+@import "./tokens.generated.css";
 @config "../tailwind.config.js";
 
 /* Redefines Tailwind's `dark:` variant to key off a manually-set
@@ -8,88 +12,31 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ============================================================
-   THEME — every color used anywhere on the site lives here, as a
-   semantic token (what the color is FOR, e.g. "surface", not what it
-   IS, e.g. "white"). Change a value below and every component using
-   that token updates everywhere at once — nothing to hunt down in
-   individual components. Tokens are named to match their Figma
-   variables (slashes become hyphens) so this file stays the single
-   source of truth; `tailwind.config.js` just aliases `bg-<token>` /
-   `text-<token>` / etc. to `var(--color-<token>)`.
+   THEME — every color used anywhere on the site is a semantic token
+   (what the color is FOR, e.g. "surface", not what it IS, e.g.
+   "white"). The token VALUES live in `tokens/*.json`, which mirror the
+   Figma "Primitives" and "Theme" variable collections 1:1, and are
+   compiled to `tokens.generated.css` by `scripts/build-tokens.mjs`
+   (`npm run tokens`, also run automatically on predev / prebuild).
+   Edit the JSON (or re-export it from Figma) — never the generated CSS.
 
-   Light values live on :root (the default). Dark values live on
-   :root[data-theme="dark"], which is the ONLY thing that ever
-   overrides them — see ThemeToggle.tsx. There's no
+   The generated file defines light values on :root (the default) and
+   dark values on :root[data-theme="dark"], which is the ONLY thing
+   that ever overrides them — see ThemeToggle.tsx. There's no
    `@media (prefers-color-scheme: dark)` block by design: the theme
    never switches on its own, only via the toggle.
+
+   `tailwind.config.js` just aliases `bg-<token>` / `text-<token>` /
+   etc. to `var(--color-<token>)`.
    ============================================================ */
-:root {
-  --color-on-surface: #000000; /* text/icons on `surface` */
-  --color-surface: #ffffff; /* main page/component background */
-  --color-inverse-surface: #000000; /* contrast band vs. `surface` (footer, top progress-bar track) */
-  --color-on-inverse-surface: #ffffff; /* text/icons on `inverse-surface` */
-  --color-secondary: #b6b2af; /* outer page letterbox behind the main content column */
-  --color-surface-variant: #b6b2af; /* same as secondary, kept in sync */
-  --color-on-surface-variant: #70665c; /* muted fg, e.g. the page-load progress-bar fill */
-  --color-primary-container: #f5f5f4; /* placeholder swatch fill for missing media */
-  --color-neutral-300: #d4d4d4; /* inactive/track color for each section's own progress bar */
-  --color-tertiary: #7c6699; /* active nav-link color, ::selection background */
-  --color-progress-bar: #000000; /* hex of tertiary */
-  --color-on-progress-bar: #70665c; /* fill color on top of `progress-bar` */
-}
-
-:root[data-theme="dark"] {
-  /* Placeholder values — the RGB complement of each light value below
-     (255-r, 255-g, 255-b), just to have *something* coherent in place
-     until real dark-theme colors are supplied. Swap freely; nothing
-     else needs to change. */
-  --color-on-surface: #ffffff; /* complement of light's #000000 */
-  --color-surface: #1a1a1a; /* complement of light's #ffffff */
-  /* inverse-surface/on-inverse-surface deliberately stay the same as
-     light (not complemented) — the footer's logo/icon SVGs are
-     pre-colored art files (not currentColor), recolored to white today
-     via a CSS `invert` filter. Flipping this pair would need the footer
-     to go light in dark theme, which would require re-deriving each
-     SVG's invert direction too; keeping the footer a constant dark band
-     in both themes sidesteps that entirely. Change deliberately,
-     together with Footer.tsx's filters, if you want the footer to
-     invert too. */
-  --color-inverse-surface: #000000;
-  --color-on-inverse-surface: #ffffff;
-  --color-secondary: #70665C; /* complement of light's #b6b2af */
-  --color-surface-variant: hsl(30, 2%, 14%); /* same as secondary, kept in sync */
-  --color-on-surface-variant: #70665C; /* complement of light's #70665c */
-  --color-primary-container: #f5f5f4;
-  --color-neutral-300: #2b2b2b; /* complement of light's #d4d4d4 */
-  --color-tertiary: hsl(266, 20%, 70%); /* light's #7c6699 kept same hue/sat; lightness raised to 70% since the original value was only 3.5:1 against this theme's `surface` (#1a1a1a) — below the 4.5:1 WCAG AA minimum for text. This passes at 7.4:1. */
-  --color-progress-bar: hsl(30, 15%, 30%); /* hex of tertiary */
-  --color-on-progress-bar: #ffffff; /* fill color on top of `progress-bar` */
-}
-
-/* No global `scroll-behavior: smooth` — it hijacks every wheel/trackpad
-   scroll, not just anchor jumps, and the browser's own re-animation of
-   each input tick reads as a short stall before the page moves. The
-   Work/About nav links get their smooth jump from an onClick handler
-   instead (see Nav.tsx), scoped to just that interaction. */
 
 body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-  user-select: none;
-}
-
-/* Text stays selectable only where it's a link or a button — everything
-   else (headings, body copy, labels) opts out via body's user-select
-   above so it reads like an app, not a document. */
-a,
-a *,
-button,
-button * {
-  user-select: text;
 }
 
 ::selection {
-  background: var(--color-tertiary);
+  background: var(--color-accent);
   color: #fff;
 }
 /* View height spacers — used to push content down the page so the sticky nav

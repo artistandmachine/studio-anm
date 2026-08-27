@@ -13,16 +13,18 @@ export default function StickyLabel({
   children,
   className = "",
   style,
+  as: Component = "p",
 }: {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  as?: "h1" | "h2" | "h3" | "h4" | "p" | "span" | "div";
 }) {
   return (
     <div className={`sticky top-22.5 ${className}`} style={style}>
-      <p className="text-label whitespace-nowrap text-on-surface">
+      <Component className="text-label whitespace-nowrap text-on-surface">
         {children}
-      </p>
+      </Component>
     </div>
   );
 }

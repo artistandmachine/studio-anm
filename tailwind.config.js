@@ -7,18 +7,19 @@ const config = {
         // Keys match the token names in app/globals.css exactly, so
         // `bg-<token>` / `text-<token>` / etc. just alias var(--color-<token>).
         // See globals.css's THEME block for the actual values (light + dark).
-        "on-surface": "var(--color-on-surface)",
+        accent: "var(--color-accent)",
         surface: "var(--color-surface)",
-        "inverse-surface": "var(--color-inverse-surface)",
-        "on-inverse-surface": "var(--color-on-inverse-surface)",
-        secondary: "var(--color-secondary)",
+        "on-surface": "var(--color-on-surface)",
         "surface-variant": "var(--color-surface-variant)",
         "on-surface-variant": "var(--color-on-surface-variant)",
         "primary-container": "var(--color-primary-container)",
-        "neutral-300": "var(--color-neutral-300)",
-        tertiary: "var(--color-tertiary)",
-        "progress-bar": "var(--color-progress-bar)",
-        "on-progress-bar": "var(--color-on-progress-bar)",
+        "on-primary-container": "var(--color-on-primary-container)",
+        border: "var(--color-border)",
+        "skeleton-fill": "var(--color-skeleton-fill)",
+        "border-sm": "var(--color-border-sm)",
+        "border-lg": "var(--color-border-lg)",
+        "progress-sm": "var(--color-progress-sm)",
+        "progress-lg": "var(--color-progress-lg)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

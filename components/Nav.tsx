@@ -10,7 +10,9 @@ import ThemeToggle from "./ThemeToggle";
 // "started" (see useActiveSection and the offset on each section's own
 // scroll-progress tracker), so a nav-link click lands a section exactly
 // where it's considered active instead of tucking it under the nav.
-const SECTION_SCROLL_BUFFER = 90;
+const SECTION_SCROLL_BUFFER = 80;
+
+const NAV_SECTION_IDS = ["#s-work", "#s-about"];
 
 function smoothScrollTo(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
   const target = document.querySelector(href);
@@ -41,9 +43,8 @@ function NavLink({
       className="group relative flex cursor-pointer select-none items-center gap-2.5 py-0.5 pl-1 pr-1.5"
     >
       <p
-        className={`text-nav-link whitespace-nowrap transition-opacity duration-200 ease-out group-active:opacity-20 ${
-          active ? "text-tertiary" : "text-on-surface opacity-100 group-hover:opacity-60"
-        }`}
+        className={`text-nav-link whitespace-nowrap transition-opacity duration-200 ease-out group-active:opacity-20 ${active ? "text-accent" : "text-on-surface opacity-100 group-hover:opacity-60"
+          }`}
       >
         {children}
       </p>
@@ -54,10 +55,10 @@ function NavLink({
 
 /** Which nav-linked section (#s-work, #s-about) is currently active, for
  * the "active" nav-link state. A section becomes active once its top has
- * scrolled up past a 90px buffer from the top of the viewport (matching
+ * scrolled up past a buffer from the top of the viewport (matching
  * the sticky nav's height), and stays active until the next section
  * crosses that same line. */
-function useActiveSection(ids: string[], buffer = 90) {
+function useActiveSection(ids: string[], buffer = SECTION_SCROLL_BUFFER) {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
@@ -69,6 +70,11 @@ function useActiveSection(ids: string[], buffer = 90) {
 
     function update() {
       ticking = false;
+      const endMarker = document.querySelector("#end") || document.querySelector("#footer");
+      if (endMarker && endMarker.getBoundingClientRect().top <= buffer) {
+        setActive(null);
+        return;
+      }
       let current: string | null = null;
       for (const el of elements) {
         if (el.getBoundingClientRect().top <= buffer) {
@@ -94,7 +100,7 @@ function useActiveSection(ids: string[], buffer = 90) {
 
 export default function Nav() {
   const { scrollYProgress } = useScroll();
-  const activeSection = useActiveSection(["#s-work", "#s-about"]);
+  const activeSection = useActiveSection(NAV_SECTION_IDS);
   const fillerProgress = useFillerProgress();
   const logoHideOffset = hideOffset(fillerProgress);
 
@@ -103,13 +109,13 @@ export default function Nav() {
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
-      <div className="relative z-10 h-1.5 w-full bg-progress-bar">
+      <div className="relative z-10 h-1.5 w-full bg-border-lg">
         <motion.div
-          className="h-full origin-left bg-on-progress-bar"
+          className="h-full origin-left bg-progress-lg"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div className="relative z-0 flex h-19 w-full items-center justify-center px-14">
+      <div className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 sm:px-6 md:px-14">
         <div className="flex items-center justify-center">
           <a
             href="#main-home"
@@ -137,7 +143,7 @@ export default function Nav() {
             </motion.span>
           </a>
         </div>
-        <nav className="flex flex-1 items-center justify-end gap-5">
+        <nav className="flex items-center justify-end gap-3 sm:gap-5">
           <ThemeToggle />
           <NavLink href="#s-work" active={activeSection === "#s-work"}>
             Work

@@ -21,8 +21,8 @@ export function getLenis() {
 export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.3,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      duration: 0.6,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),
     });
     lenisInstance = lenis;
 

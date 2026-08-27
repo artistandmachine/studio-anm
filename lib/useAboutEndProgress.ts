@@ -30,11 +30,16 @@ export function useFillerProgress(hideWindowPx = 100) {
 
   useEffect(() => {
     let ticking = false;
+    let cachedMaxScrollY = 0;
+
+    function measure() {
+      cachedMaxScrollY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    }
 
     function update() {
       ticking = false;
-      const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
-      const p = hideWindowPx !== 0 ? (window.scrollY - (maxScrollY - hideWindowPx)) / hideWindowPx : 0;
+      if (cachedMaxScrollY <= 0) measure();
+      const p = hideWindowPx !== 0 ? (window.scrollY - (cachedMaxScrollY - hideWindowPx)) / hideWindowPx : 0;
       setProgress(Math.min(Math.max(p, 0), 1));
     }
 
@@ -44,12 +49,18 @@ export function useFillerProgress(hideWindowPx = 100) {
       requestAnimationFrame(update);
     }
 
+    function onResize() {
+      measure();
+      onScroll();
+    }
+
+    measure();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [hideWindowPx]);
 

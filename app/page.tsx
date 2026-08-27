@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Headline from "@/components/Headline";
+import Intro from "@/components/Intro";
 import WorkGrid from "@/components/WorkGrid";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
@@ -18,7 +18,7 @@ export default function Home() {
           <Hero images={studio.heroImages} />
           <div className="relative flex w-full flex-col items-center">
             <ProgressMask />
-            <Headline
+            <Intro
               tagline={studio.tagline}
               intro={studio.intro}
               subIntro={studio.subIntro}
