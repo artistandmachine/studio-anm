@@ -25,13 +25,13 @@ export default function Intro({
 
   return (
     <section id="s-headline" ref={sectionRef} className="relative flex w-full flex-col items-center overflow-clip">
-      <div className="sticky top-20.5 z-10 w-full bg-surface px-6 md:px-12">
-        <div className="h-px w-full bg-border-sm">
-          <motion.div className="h-full origin-left bg-progress-sm" style={{ scaleX: scrollYProgress }} />
+      <div className="sticky top-20.5 z-10 w-full bg-surface px-3 md:px-8 lg:px-12">
+        <div className="h-px w-full bg-border">
+          <motion.div className="h-full origin-left bg-on-border" style={{ scaleX: scrollYProgress }} />
         </div>
       </div>
-      <div className="flex w-full items-start px-4 sm:px-6 md:px-14">
-        <div className="hidden sm:flex w-12 md:w-19.25 shrink-0 flex-col items-center self-stretch">
+      <div className="flex w-full items-start px-4 md:px-10 lg:px-14">
+        <div className="hidden sm:flex w-12 md:w-19.25 shrink-0 flex-col items-start self-stretch">
           <div className="spacer-1" />
           <StickyLabel as="h2">Studio A&amp;M</StickyLabel>
         </div>

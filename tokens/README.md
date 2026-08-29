@@ -31,18 +31,18 @@ literals (see below).
 
 | Variable                     | Light                | Dark                 |
 | ---------------------------- | -------------------- | -------------------- |
-| `color/accent`               | → `brand/primary`    | `#B0A3C2` (literal¹) |
 | `color/surface`              | `#FFFFFF`            | `#1A1A1A`            |
 | `color/on-surface`           | `#000000`            | `#FFFFFF`            |
-| `color/primary-container`    | `#000000`            | `#000000`            |
-| `color/on-primary-container` | `#FFFFFF`            | `#FFFFFF`            |
 | `color/surface-variant`      | → `brand/secondary`  | `#404040` (Tailwind neutral-800²) |
 | `color/on-surface-variant`   | → `brand/tertiary`   | `#A89F91` (literal¹) |
+| `color/primary-container`    | `#000000`            | `#000000`            |
+| `color/on-primary-container` | `#FFFFFF`            | `#FFFFFF`            |
+| `color/border`               | `#70665C` @ 30%      | → `brand/tertiary`   |
+| `color/on-border`            | `#000000`            | `#FFFFFF`            |
+| `color/bar`                  | `#000000`            | → `brand/tertiary`   |
+| `color/on-bar`               | → `brand/tertiary`   | `#FFFFFF`            |
+| `color/accent`               | → `brand/primary`    | `#B0A3C2` (literal¹) |
 | `color/skeleton-fill`        | `#F5F5F5` (Tailwind neutral-100²) | _same as Light³_ |
-| `color/border-sm`            | `#70665C` @ 30%      | → `brand/tertiary`   |
-| `color/progress-sm`          | `#000000`            | `#FFFFFF`            |
-| `color/border-lg`            | `#000000`            | → `brand/tertiary`   |
-| `color/progress-lg`          | → `brand/tertiary`   | `#FFFFFF`            |
 
 ¹ Lightened for WCAG AA contrast against the dark surface — keep the rationale
 in the variable's description and in `tokens/theme.dark.json`.

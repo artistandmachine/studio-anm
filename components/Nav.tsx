@@ -109,13 +109,13 @@ export default function Nav() {
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
-      <div className="relative z-10 h-1.5 w-full bg-border-lg">
+      <div className="relative z-10 h-1.5 w-full bg-bar">
         <motion.div
-          className="h-full origin-left bg-progress-lg"
+          className="h-full origin-left bg-on-bar"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 sm:px-6 md:px-14">
+      <div className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
         <div className="flex items-center justify-center">
           <a
             href="#main-home"

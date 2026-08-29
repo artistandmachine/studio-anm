@@ -30,10 +30,10 @@ export default function Footer({
             className="h-14 sm:h-16 md:h-20 w-auto max-w-full object-contain"
           />
         </div>
-        <div className="flex w-full md:flex-1 flex-row items-center self-stretch">
-          <div className="flex h-full w-full flex-1 flex-col items-start pb-3.5">
+        <div className="flex w-full min-w-0 md:flex-1 flex-row items-center self-stretch">
+          <div className="flex h-full w-full min-w-0 flex-1 flex-col items-start pb-3.5">
             {/* Wordmark row */}
-            <div className="flex h-8 w-full items-center justify-start md:justify-center overflow-clip pr-0 md:pr-52.5">
+            <div className="flex h-8 w-full items-center justify-start md:justify-center overflow-clip pr-0 lg:pr-52.5">
               <Wordmark className="h-3 w-fit" />
             </div>
             {/* Divider between wordmark and email */}
