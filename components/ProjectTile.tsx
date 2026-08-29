@@ -18,9 +18,71 @@ export type Project = {
   partnerLogo?: string;
 };
 
-export default function ProjectTile({ project }: { project: Project }) {
+/**
+ * The two ways a project can render inside WorkProjects. Mirrors Framer's
+ * component-variant model: one named prop picks a whole layout, and each
+ * variant is its own self-contained sub-component below rather than a
+ * pile of conditional classes on a shared tree. WorkProjects owns the
+ * choice (and the wrapping container) and threads it down as `variant`.
+ *
+ *  - "grid": small media card, sized by a wrapping CSS grid
+ *  - "list": full-width detail row — title, description, meta, logos, media
+ */
+export type ProjectTileVariant = "grid" | "list";
+
+export default function ProjectTile({
+  project,
+  variant = "grid",
+}: {
+  project: Project;
+  variant?: ProjectTileVariant;
+}) {
+  return variant === "list" ? (
+    <ProjectTileList project={project} />
+  ) : (
+    <ProjectTileGridCard project={project} />
+  );
+}
+
+/* ── Grid: small media card, sized by the parent grid, wraps into rows ── */
+
+function ProjectTileGridCard({ project }: { project: Project }) {
   return (
-    <article className="flex w-full flex-col  lg:flex-row items-start justify-end gap-6 lg:gap-14 overflow-clip">
+    <article className="flex w-full flex-col items-start gap-2 overflow-clip">
+      <Media
+        src={project.image}
+        video={project.video}
+        alt={project.title}
+        sizes="(min-width: 1024px) 400px, (min-width: 640px) 45vw, 100vw"
+        className="aspect-5/4 w-full"
+      />
+      <div className="flex w-full items-start justify-between gap-4">
+        <div className="flex min-w-0 max-w-[70%] flex-col gap-1">
+          <h3 className="text-project-title text-on-surface">{project.title}</h3>
+          {project.capability && (
+            <p className="text-project-meta text-on-surface/60">{project.capability}</p>
+          )}
+        </div>
+        {(project.clientLogo || project.partnerLogo) && (
+          <div className="flex min-w-20 max-w-[20%] shrink-0 flex-col items-end gap-6">
+            {project.clientLogo && (
+              <Logo src={project.clientLogo} className="h-auto w-full" />
+            )}
+            {project.partnerLogo && (
+              <Logo src={project.partnerLogo} className="h-auto w-full" />
+            )}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/* ── List: full-width detail row ─────────────────────────────────── */
+
+function ProjectTileList({ project }: { project: Project }) {
+  return (
+    <article className="flex w-full flex-col  lg:flex-row items-start justify-end gap-6 lg:gap-14 overflow-clip pl-1">
       <div className="order-2 lg:order-1 flex w-full lg:min-w-75 lg:max-w-120 flex-1 flex-col items-start gap-2 overflow-clip">
         <div className="flex w-full items-end pr-0 lg:pr-6">
           <h3 className="text-project-title min-w-0 flex-1 text-on-surface">

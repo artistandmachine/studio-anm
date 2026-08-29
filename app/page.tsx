@@ -1,7 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
-import WorkGrid from "@/components/WorkGrid";
+import WorkProjects from "@/components/WorkProjects";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import ProgressMask from "@/components/ProgressMask";
@@ -25,7 +25,7 @@ export default function Home() {
               signoff={studio.signoff}
               designerFirstName={studio.designer.name.split(" ")[0]}
             />
-            <WorkGrid projects={projects} />
+            <WorkProjects projects={projects} />
             <About
               capabilities={studio.capabilities}
               images={studio.capabilityImages}
