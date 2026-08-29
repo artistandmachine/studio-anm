@@ -56,7 +56,7 @@ export default function Hero({ images }: { images: string[] }) {
   }
 
   return (
-    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-4 md:px-10 lg:px-14">
+    <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-3 md:px-8 lg:px-12">
       <div
         className="relative aspect-1104/621 w-full"
         onTouchStart={handleTouchStart}
