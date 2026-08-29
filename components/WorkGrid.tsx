@@ -37,7 +37,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
         <div className="flex min-w-0 flex-1 flex-col items-center w-full">
           {years.map((year) => (
             <div key={year} className="flex w-full flex-col sm:flex-row items-start">
-              <div className="flex w-full pr-3 sm:w-auto sm:flex-1 flex-col items-start sm:items-center ">
+              <div className="flex w-full pr-3 sm:w-auto sm:flex-1 flex-col items-start sm:items-center self-stretch">
                 <div className="hidden sm:block spacer-2 w-full shrink-0" />
                 <div className="sm:hidden pt-8 pb-4">
                   <span className="text-label text-on-surface sm:hidden">Work — {year}</span>
