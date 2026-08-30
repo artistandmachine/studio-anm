@@ -74,6 +74,7 @@ export default function Hero({ images }: { images: string[] }) {
               src={src}
               sizes="(min-width: 1200px) 1104px, 100vw"
               priority={i === 0}
+              loading={i === 0 ? undefined : "eager"}
               className="h-full w-full"
             />
           </div>

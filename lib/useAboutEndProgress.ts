@@ -30,37 +30,46 @@ export function useFillerProgress(hideWindowPx = 100) {
 
   useEffect(() => {
     let ticking = false;
-    let cachedMaxScrollY = 0;
 
-    function measure() {
-      cachedMaxScrollY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    }
-
+    // Read scrollHeight fresh every frame instead of caching it. The page
+    // height is not stable after mount — the web font swaps in, images
+    // and SVG logos load without reserved height, and the WorkProjects
+    // grid/list toggle restructures whole sections. A value cached at
+    // mount is almost always too small, which makes `maxScrollY -
+    // hideWindowPx` fall short of the real bottom and the hide animation
+    // finish early (before the footer is even in view). One layout read
+    // per rAF-throttled scroll frame is cheap.
     function update() {
       ticking = false;
-      if (cachedMaxScrollY <= 0) measure();
-      const p = hideWindowPx !== 0 ? (window.scrollY - (cachedMaxScrollY - hideWindowPx)) / hideWindowPx : 0;
+      const maxScrollY = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight
+      );
+      const p =
+        hideWindowPx !== 0
+          ? (window.scrollY - (maxScrollY - hideWindowPx)) / hideWindowPx
+          : 0;
       setProgress(Math.min(Math.max(p, 0), 1));
     }
 
-    function onScroll() {
+    function schedule() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(update);
     }
 
-    function onResize() {
-      measure();
-      onScroll();
-    }
-
-    measure();
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    // Height changes that fire neither scroll nor resize (font swap, late
+    // images, the grid/list toggle) still need to re-run the math while
+    // the viewport sits still — e.g. parked at the bottom of the page.
+    const ro = new ResizeObserver(schedule);
+    ro.observe(document.documentElement);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      ro.disconnect();
     };
   }, [hideWindowPx]);
 

@@ -25,6 +25,7 @@ export default function Media({
   alt = "",
   sizes,
   priority,
+  loading,
   className = "",
 }: {
   src: string;
@@ -32,6 +33,10 @@ export default function Media({
   alt?: string;
   sizes: string;
   priority?: boolean;
+  /** Override the default lazy load — e.g. "eager" for off-screen hero
+   * slides that must be ready before the carousel rotates to them.
+   * Ignored when `priority` is set (that already forces eager). */
+  loading?: "eager" | "lazy";
   className?: string;
 }) {
   const [videoFailed, setVideoFailed] = useState(false);
@@ -55,7 +60,7 @@ Scope it to specific sections only — since every section shares this one Media
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (
-        <Photo src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+        <Photo src={src} alt={alt} fill sizes={sizes} priority={priority} loading={loading} className="object-cover" />
       )}
       <div className="pointer-events-none absolute inset-0 bg-black mix-blend-saturation opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-0 group-hover:duration-0" />
     </div>

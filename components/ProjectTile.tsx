@@ -66,10 +66,10 @@ function ProjectTileGridCard({ project }: { project: Project }) {
         {(project.clientLogo || project.partnerLogo) && (
           <div className="flex min-w-20 max-w-[20%] shrink-0 flex-col items-end gap-6">
             {project.clientLogo && (
-              <Logo src={project.clientLogo} className="h-auto w-full" />
+              <Logo src={project.clientLogo} className="h-8 w-full object-right" />
             )}
             {project.partnerLogo && (
-              <Logo src={project.partnerLogo} className="h-auto w-full" />
+              <Logo src={project.partnerLogo} className="h-8 w-full object-right" />
             )}
           </div>
         )}
@@ -135,8 +135,8 @@ function ProjectTileList({ project }: { project: Project }) {
 
       {(project.clientLogo || project.partnerLogo) && (
         <div className="order-last lg:order-2 flex w-auto lg:w-25 shrink-0 flex-row lg:flex-col items-center justify-start lg:justify-center gap-4 lg:gap-5 overflow-visible">
-          {project.clientLogo && <Logo src={project.clientLogo} className="h-auto max-h-8 w-auto max-w-28 lg:max-h-none lg:w-full lg:max-w-full" />}
-          {project.partnerLogo && <Logo src={project.partnerLogo} className="h-auto max-h-8 w-auto max-w-28 lg:max-h-none lg:w-full lg:max-w-full" />}
+          {project.clientLogo && <Logo src={project.clientLogo} className="h-8 w-28 object-left lg:h-10 lg:w-full" />}
+          {project.partnerLogo && <Logo src={project.partnerLogo} className="h-8 w-28 object-left lg:h-10 lg:w-full" />}
         </div>
       )}
 

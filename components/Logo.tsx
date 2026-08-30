@@ -8,6 +8,11 @@ import { useState } from "react";
  * project's clientLogo/partnerLogo path can be set in projects.json
  * ahead of the actual file — it just renders nothing until a real SVG
  * is dropped in at that path, no code change needed.
+ *
+ * `object-contain` is baked in so callers only ever need to hand it a
+ * fixed-size box (a definite height + width) — logos vary wildly in
+ * aspect ratio, and without a reserved box each one shifts the page as
+ * it decodes mid-scroll. Always give the className a concrete height.
  */
 export default function Logo({
   src,
@@ -22,5 +27,14 @@ export default function Logo({
 
   if (failed) return null;
 
-  return <img src={src} alt={alt} className={`dark:invert ${className}`} onError={() => setFailed(true)} />;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      className={`block object-contain dark:invert ${className}`}
+      onError={() => setFailed(true)}
+    />
+  );
 }
