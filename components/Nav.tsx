@@ -48,7 +48,8 @@ function NavLink({
       >
         {children}
       </p>
-      <span className="absolute bottom-0 right-0 top-0 w-px bg-on-surface" />
+      {/* nav-dev: white so it inverts with the rest of the blended #nav */}
+      <span className="absolute bottom-0 right-0 top-0 w-px bg-white" />
     </a>
   );
 }
@@ -112,7 +113,7 @@ export default function Nav() {
   // blend sat on #nav-bar. White ink under exclusion: over a dark backdrop
   // it reads white, over a light backdrop it reads dark.
   return (
-    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center mix-blend-exclusion text-white [&_*]:text-white [&_span]:bg-white">
+    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center mix-blend-exclusion text-white [&_*]:text-white">
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
