@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import ProjectTile, { Project, ProjectTileVariant } from "./ProjectTile";
+import ViewToggle from "./ViewToggle";
 import { useMinWidth } from "@/lib/useMinWidth";
 
 export default function WorkProjects({ projects }: { projects: Project[] }) {
@@ -107,59 +108,5 @@ function YearBlock({
         </div>
       </div>
     </div>
-  );
-}
-
-function ViewToggle({
-  view,
-  onChange,
-}: {
-  view: ProjectTileVariant;
-  onChange: (v: ProjectTileVariant) => void;
-}) {
-  return (
-    <div className="flex items-center gap-1">
-      {([
-        ["list", "List view", <ListIcon key="i" />],
-        ["grid", "Grid view", <GridIcon key="i" />],
-      ] as const).map(([v, label, icon]) => (
-        <button
-          key={v}
-          type="button"
-          onClick={() => onChange(v)}
-          aria-pressed={view === v}
-          aria-label={label}
-          className={`transition-opacity duration-200 ${
-            view === v
-              ? "text-on-surface"
-              : "text-on-surface/40 hover:text-on-surface/70"
-          }`}
-        >
-          {icon}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-/* View-toggle icons — inline so stroke follows currentColor, matching
-   the ThemeIcons pattern. */
-
-function ListIcon() {
-  return (
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-      <path d="M2 4H14M2 8H14M2 12H14" stroke="currentColor" strokeLinecap="square" />
-    </svg>
-  );
-}
-
-function GridIcon() {
-  return (
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-      <rect x="2" y="2" width="5" height="5" stroke="currentColor" />
-      <rect x="9" y="2" width="5" height="5" stroke="currentColor" />
-      <rect x="2" y="9" width="5" height="5" stroke="currentColor" />
-      <rect x="9" y="9" width="5" height="5" stroke="currentColor" />
-    </svg>
   );
 }
