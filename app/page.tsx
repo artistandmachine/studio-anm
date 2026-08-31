@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import BackToTop from "@/components/BackToTop";
 import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
 import WorkProjects from "@/components/WorkProjects";
@@ -32,14 +33,20 @@ export default function Home() {
               designer={studio.designer}
             />
           </div>
-          {/* 80px of breathing room before the footer band. Its own
-              height is otherwise inert now — useFillerProgress measures
-              from this element's top all the way to #footer's bottom
-              (see lib/useAboutEndProgress.ts), so the About bar, its
-              "About" label, the mask, and the nav logo finish sliding
-              off-screen exactly as the footer's bottom edge comes into
-              view, not abruptly right as this gap begins. */}
-          <div id="s-footer-filler" className="h-20 w-full" />
+          {/* 80px of breathing room before the footer band, and the home
+              for the back-to-top button (bottom-right, 12px above the
+              footer). Its height doesn't feed any animation —
+              useFillerProgress measures from max scroll all the way to
+              #footer's bottom (see lib/useAboutEndProgress.ts), so the
+              About bar, its "About" label, the mask, and the nav logo
+              finish sliding off-screen exactly as the footer's bottom
+              edge comes into view, not abruptly as this gap begins. */}
+          <div
+            id="s-footer-filler"
+            className="flex h-20 w-full items-end justify-end px-6 md:px-14 pb-3"
+          >
+            <BackToTop />
+          </div>
           <Footer
             studioName={studio.name}
             email={studio.designer.email}

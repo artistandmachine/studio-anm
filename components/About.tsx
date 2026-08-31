@@ -87,7 +87,10 @@ export default function About({
   // incoming section's bar first, rather than both vanishing in lockstep.
   const designerColumnRef = useRef<HTMLDivElement>(null);
   const labelProgress = useLabelHideProgress(designerColumnRef);
-  const labelHideY = hideOffset(labelProgress);
+  // Extra upward travel (vs the shared 100px) so the label fully clears
+  // the nav band — at only -100 a sliver still sits behind the
+  // mix-blend-exclusion nav bar and ghosts through the blend.
+  const labelHideY = hideOffset(labelProgress, 130);
 
   return (
     <section id="s-about" ref={sectionRef} className="relative flex w-full flex-col items-center overflow-clip">
