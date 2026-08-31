@@ -115,7 +115,10 @@ export default function Nav() {
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
+      {/* nav-dev: exclusion blend so the logo + links invert against
+          whatever section scrolls beneath the sticky bar. Scoped to this
+          row only — the progress bar above keeps its solid fill. */}
+      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14 mix-blend-exclusion">
         <div id="nav-logo" className="flex items-center justify-center">
           <a
             href="#main-home"
@@ -135,10 +138,12 @@ export default function Nav() {
               whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               whileTap={{ scale: 1, transition: { duration: 0 } }}
             >
+              {/* nav-dev: dropped dark:invert on the logo — exclusion already
+                  flips the mark against the backdrop; inverting double-flips it */}
               <img
                 src="/brand/logo-mark.svg"
                 alt="Studio A&amp;M"
-                className="h-4 w-20.25 dark:invert"
+                className="h-4 w-20.25"
               />
             </motion.span>
           </a>
