@@ -105,66 +105,77 @@ export default function Nav() {
   const fillerProgress = useFillerProgress();
   const logoHideOffset = hideOffset(fillerProgress);
 
-  // nav-dev: the Framer recipe — blend is on the WHOLE component (#nav), and
-  // every color inside it is inverted to white. #nav composites to a group
-  // buffer first, THEN that buffer blends against the page with exclusion —
-  // so internal isolation (the logo's inline translateY, the motion
-  // transforms) no longer breaks individual pieces the way it did when the
-  // blend sat on #nav-bar. White ink under exclusion: over a dark backdrop
-  // it reads white, over a light backdrop it reads dark.
+  // nav-dev: the progress bar is a SIBLING of #nav, not a child — it has
+  // to sit outside #nav's stacking context for it to escape the blend
+  // entirely (a blend on/inside #nav that still needs to read the page
+  // background at rest can't also spare a descendant). So:
+  //   #nav-progress — sticky top-0, un-blended, normal bar tokens
+  //   #nav          — sticky top-1.5 (right below it), mix-blend-exclusion
+  // Stacked flush, same total height as before. White ink under
+  // exclusion: over a dark backdrop it reads white, over light, dark.
   return (
-    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center mix-blend-exclusion text-white [&_*]:text-white">
-      {/* z-index above the nav row below — otherwise the row's own
-          content (e.g. the logo, mid hide-animation) paints over this
-          bar by default DOM order once a transform makes them overlap. */}
-      <div id="nav-progress" className="relative z-10 h-1.5 w-full bg-white/25">
+    <>
+      <div id="nav-progress" className="sticky top-0 z-[51] h-1.5 w-full bg-bar">
         <motion.div
-          className="h-full origin-left bg-white"
+          className="h-full origin-left bg-on-bar"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
-        <div id="nav-logo" className="flex items-center justify-center">
-          <a
-            href="#main-home"
-            onClick={(e) => {
-              e.preventDefault();
-              const lenis = getLenis();
-              if (lenis) {
-                lenis.scrollTo(0);
-              } else {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+      <header
+        id="nav"
+        className="sticky top-1.5 z-50 flex w-full flex-col items-center mix-blend-exclusion text-white [&_*]:text-white"
+      >
+        <div id="nav-bar" className="relative flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
+          <div id="nav-logo" className="flex items-center justify-center">
+            <a
+              href="#main-home"
+              onClick={(e) => {
+                e.preventDefault();
+                const lenis = getLenis();
+                if (lenis) {
+                  lenis.scrollTo(0);
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              // Only set a transform when the logo is actually hiding — a
+              // permanent translateY(0) would give this subtree its own
+              // isolated compositing group and keep the mark from blending
+              // with #nav-bar's exclusion.
+              style={
+                logoHideOffset
+                  ? { transform: `translateY(${logoHideOffset}px)` }
+                  : undefined
               }
-            }}
-            style={{ transform: `translateY(${logoHideOffset}px)` }}
-          >
-            <motion.span
-              className="inline-block"
-              whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
-              whileTap={{ scale: 1, transition: { duration: 0 } }}
             >
-              {/* nav-dev: invert the black mark to white so it reads as part
-                  of the white-ink component; exclusion on #nav then flips it
-                  against whatever's behind. dark:invert is gone — theme is
-                  irrelevant once the whole bar is blended. */}
-              <img
-                src="/brand/logo-mark.svg"
-                alt="Studio A&amp;M"
-                className="h-4 w-20.25 invert"
-              />
-            </motion.span>
-          </a>
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                whileTap={{ scale: 1, transition: { duration: 0 } }}
+              >
+                {/* nav-dev: invert the black mark to white so it reads as
+                    part of the white-ink bar; exclusion on #nav then flips
+                    it against whatever's behind. dark:invert is gone —
+                    theme is irrelevant once the bar is blended. */}
+                <img
+                  src="/brand/logo-mark.svg"
+                  alt="Studio A&amp;M"
+                  className="h-4 w-20.25 invert"
+                />
+              </motion.span>
+            </a>
+          </div>
+          <nav id="nav-links" className="flex items-center justify-end gap-3 sm:gap-5">
+            <ThemeToggle />
+            <NavLink href="#s-work" active={activeSection === "#s-work"}>
+              Work
+            </NavLink>
+            <NavLink href="#s-about" active={activeSection === "#s-about"}>
+              About
+            </NavLink>
+          </nav>
         </div>
-        <nav id="nav-links" className="flex items-center justify-end gap-3 sm:gap-5">
-          <ThemeToggle />
-          <NavLink href="#s-work" active={activeSection === "#s-work"}>
-            Work
-          </NavLink>
-          <NavLink href="#s-about" active={activeSection === "#s-about"}>
-            About
-          </NavLink>
-        </nav>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
