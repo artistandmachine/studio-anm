@@ -95,6 +95,7 @@ export default function About({
           label below (see hideY) instead of using its native sticky
           unstick point — see useAboutEndProgress comment above. */}
       <div
+        id="about-progress"
         className="sticky top-20.5 z-10 w-full bg-surface px-3 md:px-8 lg:px-12"
         style={{ transform: `translateY(${hideY}px)` }}
       >
@@ -103,21 +104,21 @@ export default function About({
         </div>
       </div>
 
-      <div className="flex w-full items-start px-4 md:px-10 lg:px-14">
+      <div id="about-row" className="flex w-full items-start px-4 md:px-10 lg:px-14">
         {/* Left rail: sticky "About" label, pinned for the section's whole scroll range */}
-        <div className="hidden sm:flex w-12 md:w-19.25 shrink-0 flex-col items-center self-stretch">
+        <div id="about-rail" className="hidden sm:flex w-12 md:w-19.25 shrink-0 flex-col items-center self-stretch">
           <div className="h-[25vh] w-full shrink-0" />
           <StickyLabel as="h2" style={{ transform: `translateY(${labelHideY}px)` }}>About</StickyLabel>
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col items-end w-full">
+        <div id="about-body" className="flex min-w-0 flex-1 flex-col items-end w-full">
           <div className="h-[25vh] sm:h-[50vh] w-full shrink-0" />
           <div className="sm:hidden w-full pb-4">
             <span className="text-label text-on-surface">About</span>
           </div>
           {/* blockCapabilities: sticky "Capabilities" label on the left,
               capability text column, capability image column */}
-          <div className="flex w-full flex-col lg:flex-row items-start justify-end">
+          <div id="about-capabilities" className="flex w-full flex-col lg:flex-row items-start justify-end">
             <div className="flex min-w-0 flex-1 shrink-0 flex-col items-start sm:items-center self-stretch">
               <StickyLabel as="h3" className="w-full text-left sm:text-center">Capabilities</StickyLabel>
             </div>
@@ -147,7 +148,7 @@ export default function About({
 
           {/* blockTeam: sticky "Designer" label on the left, designer
               photo/name/social links on the right */}
-          <div className="flex w-full flex-col sm:flex-row items-start justify-between px-0 sm:px-6 md:px-12 lg:px-32">
+          <div id="about-designer" className="flex w-full flex-col sm:flex-row items-start justify-between px-0 sm:px-6 md:px-12 lg:px-32">
             <div ref={designerColumnRef} className="flex flex-1 flex-col items-start sm:items-center self-stretch">
               <div className="h-[25vh] sm:h-[50vh] w-full shrink-0" />
               <StickyLabel as="h3" className="w-full text-left sm:text-center">Designer</StickyLabel>

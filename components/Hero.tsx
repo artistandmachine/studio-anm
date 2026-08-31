@@ -58,6 +58,7 @@ export default function Hero({ images }: { images: string[] }) {
   return (
     <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-3 md:px-8 lg:px-12">
       <div
+        id="hero-carousel"
         className="relative aspect-1104/621 w-full"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -102,7 +103,7 @@ export default function Hero({ images }: { images: string[] }) {
         )}
 
         {images.length > 1 && (
-          <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 sm:gap-12 md:gap-30">
+          <div id="hero-pagination" className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 sm:gap-12 md:gap-30">
             {images.map((src, i) => (
               <button
                 key={src}

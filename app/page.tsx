@@ -12,11 +12,11 @@ export default function Home() {
 
   return (
     <main id="main-home" className="relative flex w-full flex-col items-center bg-surface-variant">
-      <div className="flex w-full flex-col items-center px-[2vw]">
-        <div className="flex w-full max-w-[1800px] flex-col items-center bg-surface">
+      <div id="page-gutter" className="flex w-full flex-col items-center px-[2vw]">
+        <div id="page-frame" className="flex w-full max-w-[1800px] flex-col items-center bg-surface">
           <Nav />
           <Hero images={studio.heroImages} />
-          <div className="relative flex w-full flex-col items-center">
+          <div id="page-content" className="relative flex w-full flex-col items-center">
             <ProgressMask />
             <Intro
               tagline={studio.tagline}

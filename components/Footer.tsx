@@ -22,15 +22,15 @@ export default function Footer({
 
       {/* Middle block: big logo mark on the left, wordmark/divider/email
           stacked in a column on the right. */}
-      <div className="flex w-full flex-col md:flex-row items-center justify-between gap-8 md:gap-12 my-auto">
-        <div className="flex shrink-0 flex-col items-start overflow-clip max-w-full">
+      <div id="footer-main" className="flex w-full flex-col md:flex-row items-center justify-between gap-8 md:gap-12 my-auto">
+        <div id="footer-logo" className="flex shrink-0 flex-col items-start overflow-clip max-w-full">
           <img
             src="/brand/logo-mark-large.svg"
             alt={'Artist & Machine™'}
             className="h-14 sm:h-16 md:h-20 w-auto max-w-full object-contain"
           />
         </div>
-        <div className="flex w-full min-w-0 md:flex-1 flex-row items-center self-stretch">
+        <div id="footer-info" className="flex w-full min-w-0 md:flex-1 flex-row items-center self-stretch">
           <div className="flex h-full w-full min-w-0 flex-1 flex-col items-start pb-3.5">
             {/* Wordmark row */}
             <div className="flex h-8 w-full items-center justify-start md:justify-center overflow-clip pr-0 lg:pr-52.5">
@@ -53,7 +53,7 @@ export default function Footer({
       </div>
 
       {/* Bottom row: social icons, right-aligned */}
-      <div className="flex h-14 md:h-20 w-full items-end justify-end gap-6 overflow-clip py-2 md:py-6">
+      <div id="footer-social" className="flex h-14 md:h-20 w-full items-end justify-end gap-6 overflow-clip py-2 md:py-6">
         <a
           href={instagram}
           target="_blank"

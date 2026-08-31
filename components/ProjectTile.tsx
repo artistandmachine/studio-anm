@@ -48,13 +48,13 @@ export default function ProjectTile({
 
 function ProjectTileGridCard({ project }: { project: Project }) {
   return (
-    <article className="flex w-full flex-col items-start gap-2 overflow-clip">
+    <article id={`tile-${project.id}`} className="flex w-full flex-col items-start gap-2 overflow-clip">
       <Media
         src={project.image}
         video={project.video}
         alt={project.title}
         sizes="(min-width: 1024px) 400px, (min-width: 640px) 45vw, 100vw"
-        className="aspect-5/4 w-full"
+        className="img-tile"
       />
       <div className="flex w-full items-start justify-between gap-4">
         <div className="flex min-w-0 max-w-[70%] flex-col gap-1">
@@ -82,7 +82,7 @@ function ProjectTileGridCard({ project }: { project: Project }) {
 
 function ProjectTileList({ project }: { project: Project }) {
   return (
-    <article className="flex w-full flex-col  lg:flex-row items-start justify-end gap-6 lg:gap-14 overflow-clip pl-1">
+    <article id={`tile-${project.id}`} className="flex w-full flex-col  lg:flex-row items-start justify-end gap-6 lg:gap-14 overflow-clip pl-1">
       <div className="order-2 lg:order-1 flex w-full lg:min-w-75 lg:max-w-120 flex-1 flex-col items-start gap-2 overflow-clip">
         <div className="flex w-full items-end pr-0 lg:pr-6">
           <h3 className="text-project-title min-w-0 flex-1 text-on-surface">
@@ -145,7 +145,7 @@ function ProjectTileList({ project }: { project: Project }) {
         video={project.video}
         alt={project.title}
         sizes="(min-width: 1024px) 500px, 100vw"
-        className="order-1 lg:order-3 aspect-5/4 w-full lg:max-w-150 shrink-0 lg:shrink"
+        className="img-tile order-1 lg:order-3 lg:max-w-150 shrink-0 lg:shrink"
       />
     </article>
   );

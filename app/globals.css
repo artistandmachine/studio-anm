@@ -73,6 +73,28 @@ body {
   width: 100%;
 }
 
+/* Image sizes — the three fixed aspect ratios every media slot on the
+   site snaps to. Drop one on a `<Media>` wrapper (or any element) in
+   place of a raw `aspect-* w-full` pair. The wrapper stays fluid width;
+   height follows from the ratio.
+     .img-presentation — 1920×1080, 16:9  (hero / presentation stills)
+     .img-social       — 1080×1350, 4:5   (portrait social crop)
+     .img-tile         — 1000×800,  5:4   (Work section project tiles) */
+@utility img-presentation {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+@utility img-social {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+
+@utility img-tile {
+  aspect-ratio: 5 / 4;
+  width: 100%;
+}
+
 /* Text styles — every typographic treatment used on the site, named and
    centralized here so changing a font-size/weight/spacing updates every
    usage at once instead of hunting down repeated Tailwind utility

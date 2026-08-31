@@ -105,18 +105,18 @@ export default function Nav() {
   const logoHideOffset = hideOffset(fillerProgress);
 
   return (
-    <header className="sticky top-0 z-50 flex w-full flex-col items-center">
+    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center">
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
-      <div className="relative z-10 h-1.5 w-full bg-bar">
+      <div id="nav-progress" className="relative z-10 h-1.5 w-full bg-bar">
         <motion.div
           className="h-full origin-left bg-on-bar"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      <div className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
-        <div className="flex items-center justify-center">
+      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
+        <div id="nav-logo" className="flex items-center justify-center">
           <a
             href="#main-home"
             onClick={(e) => {
@@ -143,7 +143,7 @@ export default function Nav() {
             </motion.span>
           </a>
         </div>
-        <nav className="flex items-center justify-end gap-3 sm:gap-5">
+        <nav id="nav-links" className="flex items-center justify-end gap-3 sm:gap-5">
           <ThemeToggle />
           <NavLink href="#s-work" active={activeSection === "#s-work"}>
             Work
