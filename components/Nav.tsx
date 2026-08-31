@@ -104,24 +104,25 @@ export default function Nav() {
   const fillerProgress = useFillerProgress();
   const logoHideOffset = hideOffset(fillerProgress);
 
+  // nav-dev: the Framer recipe — blend is on the WHOLE component (#nav), and
+  // every color inside it is inverted to white. #nav composites to a group
+  // buffer first, THEN that buffer blends against the page with exclusion —
+  // so internal isolation (the logo's inline translateY, the motion
+  // transforms) no longer breaks individual pieces the way it did when the
+  // blend sat on #nav-bar. White ink under exclusion: over a dark backdrop
+  // it reads white, over a light backdrop it reads dark.
   return (
-    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center">
+    <header id="nav" className="sticky top-0 z-50 flex w-full flex-col items-center mix-blend-exclusion text-white [&_*]:text-white [&_span]:bg-white">
       {/* z-index above the nav row below — otherwise the row's own
           content (e.g. the logo, mid hide-animation) paints over this
           bar by default DOM order once a transform makes them overlap. */}
-      <div id="nav-progress" className="relative z-10 h-1.5 w-full bg-bar">
+      <div id="nav-progress" className="relative z-10 h-1.5 w-full bg-white/25">
         <motion.div
-          className="h-full origin-left bg-on-bar"
+          className="h-full origin-left bg-white"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      {/* nav-dev: difference blend with forced-white ink so the logo +
-          links always read as the inverse of whatever scrolls beneath the
-          sticky bar (white ⊖ backdrop = inverted backdrop = max contrast).
-          Scoped to this row — the progress bar above keeps its solid fill.
-          Over blank space at the very top there's no backdrop, so white ink
-          just shows as white; that's the known top-of-page tradeoff. */}
-      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14 mix-blend-difference text-white [&_*]:text-white [&_span]:bg-white">
+      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14">
         <div id="nav-logo" className="flex items-center justify-center">
           <a
             href="#main-home"
@@ -141,15 +142,14 @@ export default function Nav() {
               whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               whileTap={{ scale: 1, transition: { duration: 0 } }}
             >
-              {/* nav-dev: the logo's inline translateY (logoHideOffset) is an
-                  identity transform at rest, but ANY transform isolates this
-                  subtree from #nav-bar's blend — so the mark never composites
-                  against the backdrop. Left as the plain black mark; making it
-                  blend needs logoHideOffset applied conditionally / restructured. */}
+              {/* nav-dev: invert the black mark to white so it reads as part
+                  of the white-ink component; exclusion on #nav then flips it
+                  against whatever's behind. dark:invert is gone — theme is
+                  irrelevant once the whole bar is blended. */}
               <img
                 src="/brand/logo-mark.svg"
                 alt="Studio A&amp;M"
-                className="h-4 w-20.25 dark:invert"
+                className="h-4 w-20.25 invert"
               />
             </motion.span>
           </a>
