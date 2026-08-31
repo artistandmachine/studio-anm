@@ -17,7 +17,7 @@ export default function ViewToggle({
   onChange: (v: ProjectTileVariant) => void;
 }) {
   return (
-    <div className="flex select-none items-center gap-1">
+    <div className="flex w-full select-none px-1">
       {(
         [
           ["list", "List view", ListIcon],
@@ -33,7 +33,7 @@ export default function ViewToggle({
             disabled={current}
             aria-pressed={current}
             aria-label={label}
-            className="flex shrink-0 cursor-pointer items-center justify-center text-on-surface transition-opacity duration-200 ease-out hover:opacity-60 disabled:cursor-default disabled:opacity-60"
+            className="flex shrink-0 cursor-pointer items-center justify-center text-on-surface transition-opacity duration-200 ease-out hover:opacity-60 disabled:cursor-default disabled:opacity-20"
           >
             <Icon className="h-4 w-fit" />
           </button>
