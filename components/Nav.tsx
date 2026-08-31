@@ -115,10 +115,13 @@ export default function Nav() {
           style={{ scaleX: scrollYProgress }}
         />
       </div>
-      {/* nav-dev: exclusion blend so the logo + links invert against
-          whatever section scrolls beneath the sticky bar. Scoped to this
-          row only — the progress bar above keeps its solid fill. */}
-      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14 mix-blend-exclusion">
+      {/* nav-dev: difference blend with forced-white ink so the logo +
+          links always read as the inverse of whatever scrolls beneath the
+          sticky bar (white ⊖ backdrop = inverted backdrop = max contrast).
+          Scoped to this row — the progress bar above keeps its solid fill.
+          Over blank space at the very top there's no backdrop, so white ink
+          just shows as white; that's the known top-of-page tradeoff. */}
+      <div id="nav-bar" className="relative z-0 flex h-16 sm:h-19 w-full items-center justify-between px-4 md:px-10 lg:px-14 mix-blend-difference text-white [&_*]:text-white [&_span]:bg-white">
         <div id="nav-logo" className="flex items-center justify-center">
           <a
             href="#main-home"
@@ -138,12 +141,15 @@ export default function Nav() {
               whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               whileTap={{ scale: 1, transition: { duration: 0 } }}
             >
-              {/* nav-dev: dropped dark:invert on the logo — exclusion already
-                  flips the mark against the backdrop; inverting double-flips it */}
+              {/* nav-dev: the logo's inline translateY (logoHideOffset) is an
+                  identity transform at rest, but ANY transform isolates this
+                  subtree from #nav-bar's blend — so the mark never composites
+                  against the backdrop. Left as the plain black mark; making it
+                  blend needs logoHideOffset applied conditionally / restructured. */}
               <img
                 src="/brand/logo-mark.svg"
                 alt="Studio A&amp;M"
-                className="h-4 w-20.25"
+                className="h-4 w-20.25 dark:invert"
               />
             </motion.span>
           </a>
