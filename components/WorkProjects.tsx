@@ -4,7 +4,13 @@ import { useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import ProjectTile, { Project, ProjectTileVariant } from "./ProjectTile";
 import ViewToggle from "./ViewToggle";
+import { getLenis } from "./SmoothScroll";
 import { useMinWidth } from "@/lib/useMinWidth";
+
+// Buffer matching the sticky nav, so a view switch lands #s-work exactly
+// where the section is considered "started" (mirrors the offsets on the
+// section's own scroll-progress tracker and Nav's jump-links).
+const WORK_SCROLL_BUFFER = 80;
 
 export default function WorkProjects({ projects }: { projects: Project[] }) {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -19,6 +25,23 @@ export default function WorkProjects({ projects }: { projects: Project[] }) {
   const canToggle = useMinWidth(1280);
   const [listWanted, setListWanted] = useState(true);
   const view: ProjectTileVariant = canToggle && listWanted ? "list" : "grid";
+
+  /* Switching view can shift a lot of layout above the fold, so jump the
+     reader back to the top of Work rather than leaving them mid-section
+     over content that just moved. */
+  function changeView(next: ProjectTileVariant) {
+    setListWanted(next === "list");
+    const target = sectionRef.current;
+    if (!target) return;
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -WORK_SCROLL_BUFFER });
+    } else {
+      const top =
+        target.getBoundingClientRect().top + window.scrollY - WORK_SCROLL_BUFFER;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }
 
   const years = Array.from(new Set(projects.map((p) => p.year))).sort(
     (a, b) => b - a
@@ -41,10 +64,7 @@ export default function WorkProjects({ projects }: { projects: Project[] }) {
           <div className="sticky top-22.5 flex flex-col items-center gap-2.5">
             <h2 className="text-label whitespace-nowrap text-on-surface">Work</h2>
             {canToggle && (
-              <ViewToggle
-                view={view}
-                onChange={(v) => setListWanted(v === "list")}
-              />
+              <ViewToggle view={view} onChange={changeView} />
             )}
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function ViewToggle({
   onChange: (v: ProjectTileVariant) => void;
 }) {
   return (
-    <div className="flex w-full select-none px-1">
+    <div className="flex justify-between w-full select-none px-px">
       {(
         [
           ["list", "List view", ListIcon],
