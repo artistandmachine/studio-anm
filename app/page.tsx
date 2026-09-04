@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
 import WorkProjects from "@/components/WorkProjects";
 import About from "@/components/About";
-import Footer from "@/components/Footer";
+import Footer from "@/components/FooterSeesaw";
 import ProgressMask from "@/components/ProgressMask";
 import data from "@/data/projects.json";
 

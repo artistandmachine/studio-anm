@@ -144,6 +144,7 @@ export default function About({
                   src={src}
                   sizes="(min-width: 1024px) 500px, 100vw"
                   className="aspect-400/225 w-full"
+                  cursorFollow
                 />
               ))}
             </div>
@@ -163,6 +164,7 @@ export default function About({
                 alt={designer.name}
                 sizes="(min-width: 1024px) 500px, 100vw"
                 className="aspect-square w-full max-w-full lg:max-w-125"
+                cursorFollow
               />
               <p className="whitespace-nowrap text-body text-on-surface">
                 {designer.name}

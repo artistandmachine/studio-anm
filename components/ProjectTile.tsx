@@ -55,6 +55,7 @@ function ProjectTileGridCard({ project }: { project: Project }) {
         alt={project.title}
         sizes="(min-width: 1024px) 400px, (min-width: 640px) 45vw, 100vw"
         className="img-tile"
+        cursorFollow
       />
       <div className="flex w-full items-start justify-between gap-4">
         <div className="flex min-w-0 max-w-[70%] flex-col gap-1">
@@ -146,6 +147,7 @@ function ProjectTileList({ project }: { project: Project }) {
         alt={project.title}
         sizes="(min-width: 1024px) 500px, 100vw"
         className="img-tile order-1 lg:order-3 lg:max-w-150 shrink-0 lg:shrink"
+        cursorFollow
       />
     </article>
   );

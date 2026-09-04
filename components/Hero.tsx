@@ -12,6 +12,30 @@ export default function Hero({ images }: { images: string[] }) {
   const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartXRef = useRef<number | null>(null);
 
+  // Subtle translate/scale toward the cursor, mirroring the Work tiles.
+  // Handled here rather than via Media's `cursorFollow` because the
+  // carousel's click-zone buttons sit above the slides and would
+  // swallow the pointer events Media needs.
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [followTransform, setFollowTransform] = useState(
+    "translate(0px, 0px) scale(1)"
+  );
+
+  function handleFollowMove(e: React.MouseEvent) {
+    const el = carouselRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const xOffset = (e.clientX - rect.left) / rect.width - 0.5;
+    const yOffset = (e.clientY - rect.top) / rect.height - 0.5;
+    setFollowTransform(
+      `translate(${xOffset * 6}px, ${yOffset * 6}px) scale(1.02)`
+    );
+  }
+
+  function handleFollowLeave() {
+    setFollowTransform("translate(0px, 0px) scale(1)");
+  }
+
   useEffect(() => {
     if (images.length <= 1 || !autoRotate) return;
     const id = setInterval(() => {
@@ -59,25 +83,33 @@ export default function Hero({ images }: { images: string[] }) {
     <section id="s-hero" className="flex w-full flex-col items-center overflow-clip px-3 md:px-8 lg:px-12">
       <div
         id="hero-carousel"
+        ref={carouselRef}
         className="relative aspect-1104/621 w-full"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onMouseMove={handleFollowMove}
+        onMouseLeave={handleFollowLeave}
       >
         {images.map((src, i) => (
           <div
             key={src}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+            className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-out ${
               i === active ? "" : "pointer-events-none"
             }`}
             style={{ opacity: i === active ? 1 : 0 }}
           >
-            <Media
-              src={src}
-              sizes="(min-width: 1200px) 1104px, 100vw"
-              priority={i === 0}
-              loading={i === 0 ? undefined : "eager"}
-              className="h-full w-full"
-            />
+            <div
+              className="h-full w-full transition-transform duration-300 ease-out will-change-transform"
+              style={{ transform: i === active ? followTransform : undefined }}
+            >
+              <Media
+                src={src}
+                sizes="(min-width: 1200px) 1104px, 100vw"
+                priority={i === 0}
+                loading={i === 0 ? undefined : "eager"}
+                className="h-full w-full"
+              />
+            </div>
           </div>
         ))}
 
